@@ -11,6 +11,7 @@ export interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputEleme
   trailingSlot?: React.ReactNode
   helperText?: string
   helperIcon?: IconName
+  helperTextClassName?: string
   error?: string
   containerClassName?: string
 }
@@ -24,6 +25,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       trailingSlot,
       helperText,
       helperIcon,
+      helperTextClassName,
       error,
       containerClassName,
       className,
@@ -73,7 +75,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             {helperIcon && !error ? (
               <Icon name={helperIcon} size={16} color="var(--color-text-primary)" />
             ) : null}
-            <span className={cn(error ? 'text-red-700' : 'text-[var(--color-text-primary)]')}>
+            <span
+              className={cn(
+                error ? 'text-red-700' : 'text-[var(--color-text-primary)]',
+                !error ? helperTextClassName : undefined
+              )}
+            >
               {error || helperText}
             </span>
           </div>

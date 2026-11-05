@@ -150,7 +150,7 @@ export function DialogoConfirmacion({
           ))}
         </dl>
         <AvisoInfo tono='advertencia' titulo='Registro definitivo'>
-          Al confirmar se genera la matrícula oficial, se actualiza el Padrón General y se
+          Al confirmar se registra la matrícula oficial capturada, se actualiza el Padrón General y se
           notifica a la plantilla docente y, cuando aplique, al especialista SEE.
         </AvisoInfo>
         {error ? (

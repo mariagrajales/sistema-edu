@@ -1,5 +1,5 @@
 import { roles } from '../../../Portal/shared/constants/roles'
-import { altaConfig, crearDocumentosIniciales } from '../constants/altaConfig'
+import { crearDocumentosIniciales } from '../constants/altaConfig'
 import type { AltaBorrador } from '../types'
 
 export function crearBorradorInicial(id: string, matriculaProvisional: string): AltaBorrador {
@@ -57,6 +57,3 @@ export function siguientePasoActual(paso: number): number {
   return Math.min(3, Math.max(1, paso))
 }
 
-export function matriculaValida(matricula: string): boolean {
-  return new RegExp(`^NX-${altaConfig.anioCiclo}-\\d{3}$`).test(matricula)
-}

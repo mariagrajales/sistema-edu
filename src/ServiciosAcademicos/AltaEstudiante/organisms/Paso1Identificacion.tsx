@@ -4,8 +4,6 @@ import { escuela } from '../../../Portal/shared/constants/escuela'
 import { cn } from '../../../utils/cn'
 import {
   altaConfig,
-  grados,
-  grupos,
   meses,
   sexos,
   turnos,
@@ -37,11 +35,15 @@ import {
 } from '../utils/edad'
 import { curpCoincideCon, normalizarCurp, parsearCurp } from '../utils/curp'
 import { idCampo } from '../validation/altaSchema'
-import type { AltaBorrador, ErrorAlta } from '../types'
+import type { AltaBorrador, ErrorAlta, GrupoAlta as GrupoAltaOpcion, OpcionCatalogo } from '../types'
 
 interface Paso1Props {
   draft: AltaBorrador
   errores: ErrorAlta[]
+  gradosDisponibles: OpcionCatalogo[]
+  gruposDisponibles: GrupoAltaOpcion[]
+  catalogosCargando: boolean
+  errorCatalogos: string | null
   verificando: boolean
   duplicado?: { nombre: string; matricula: string }
   guardando: boolean
@@ -57,6 +59,10 @@ interface Paso1Props {
 export function Paso1Identificacion({
   draft,
   errores,
+  gradosDisponibles,
+  gruposDisponibles,
+  catalogosCargando,
+  errorCatalogos,
   verificando,
   duplicado,
   guardando,
@@ -137,7 +143,7 @@ export function Paso1Identificacion({
     }))
   }
 
-  const grupoSeleccionado = grupos.find(
+  const grupoSeleccionado = gruposDisponibles.find(
     (grupo) =>
       grupo.grado === draft.asignacion.grado && grupo.grupo === draft.asignacion.grupo
   )
@@ -533,12 +539,13 @@ export function Paso1Identificacion({
             etiqueta={textosPaso1.campos.grado}
             requerido
             error={errorGrado}
+            className='order-2'
           >
             <SelectConIcono
               id={idCampo('asignacion.grado')}
               value={grupoSeleccionado?.value ?? ''}
               onChange={(valor) => {
-                const grupo = grupos.find((item) => item.value === valor)
+                const grupo = gruposDisponibles.find((item) => item.value === valor)
                 onCambio((actual) => ({
                   ...actual,
                   asignacion: {
@@ -556,9 +563,9 @@ export function Paso1Identificacion({
               )}
             >
               <option value=''>Seleccione grado y grupo</option>
-              {grados.map((grado) => (
+              {gradosDisponibles.map((grado) => (
                 <optgroup key={grado.value} label={grado.label}>
-                  {grupos
+                  {gruposDisponibles
                     .filter((grupo) => grupo.grado === grado.value)
                     .map((grupo) => (
                       <option key={grupo.value} value={grupo.value}>
@@ -568,6 +575,12 @@ export function Paso1Identificacion({
                 </optgroup>
               ))}
             </SelectConIcono>
+            {catalogosCargando ? (
+              <p role='status' className='text-[13px] text-[var(--sa-muted)]'>Cargando grados y grupos…</p>
+            ) : null}
+            {errorCatalogos ? (
+              <p role='alert' className='text-[13px] font-semibold text-[var(--sa-danger)]'>{errorCatalogos}</p>
+            ) : null}
           </CampoAlta>
 
           <CampoAlta
@@ -575,6 +588,7 @@ export function Paso1Identificacion({
             etiqueta={textosPaso1.campos.turno}
             requerido
             error={errorDe('asignacion.turno')}
+            className='order-1'
             ayuda={
               turnoSeleccionado
                 ? `Horario: ${turnoSeleccionado.horario}`
@@ -587,7 +601,7 @@ export function Paso1Identificacion({
               onChange={(valor) =>
                 onCambio((actual) => ({
                   ...actual,
-                  asignacion: { ...actual.asignacion, turno: valor },
+                  asignacion: { ...actual.asignacion, turno: valor, grado: '', grupo: '' },
                 }))
               }
               invalid={Boolean(errorDe('asignacion.turno'))}
@@ -611,8 +625,10 @@ export function Paso1Identificacion({
           <CampoAlta
             id={idCampo('matriculaProvisional')}
             etiqueta={textosPaso1.campos.matricula}
-            icono='lock'
-            ayuda='Se confirma al finalizar el registro y no puede modificarse.'
+            requerido
+            ayuda='Capture la matrícula oficial asignada por la institución.'
+            error={errorDe('matriculaProvisional')}
+            className='order-3'
             extra={
               <span className='inline-flex items-center gap-1 rounded-full bg-[var(--sa-field)] px-2 py-1 text-[10px] font-extrabold tracking-[0.06em] text-[var(--sa-muted)] uppercase'>
                 <Icon name='stamp' size={12} color='currentColor' />
@@ -623,9 +639,17 @@ export function Paso1Identificacion({
             <input
               id={idCampo('matriculaProvisional')}
               value={draft.matriculaProvisional}
-              readOnly
+              onChange={(event) =>
+                onCambio((actual) => ({
+                  ...actual,
+                  matriculaProvisional: event.target.value,
+                }))
+              }
+              autoComplete='off'
+              aria-invalid={Boolean(errorDe('matriculaProvisional'))}
+              aria-required='true'
               aria-describedby={`${idCampo('matriculaProvisional')}-ayuda`}
-              className={cn(clasesInput, 'cursor-default bg-[var(--sa-field)] font-mono')}
+              className={cn(clasesInput, 'font-mono')}
             />
           </CampoAlta>
         </div>

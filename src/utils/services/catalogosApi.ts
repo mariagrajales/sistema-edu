@@ -4,6 +4,7 @@ import {
   studentsApi,
   type ApiGrade,
   type ApiSchoolGroup,
+  type ApiSchoolGroupShift,
   type ApiShift,
   type ApiStudent,
 } from './sigeanApi'
@@ -13,18 +14,29 @@ export interface Catalogos {
   grupos: ApiSchoolGroup[]
 }
 
-let catalogosPromise: Promise<Catalogos> | null = null
+const catalogosPromises = new Map<ApiSchoolGroupShift | 'ALL', Promise<Catalogos>>()
 
-export function obtenerCatalogos(): Promise<Catalogos> {
-  if (!catalogosPromise) {
-    catalogosPromise = Promise.all([gradesApi.list(), schoolGroupsApi.list()])
-      .then(([grados, grupos]) => ({ grados, grupos }))
-      .catch((error) => {
-        catalogosPromise = null
-        throw error
-      })
-  }
-  return catalogosPromise
+export function obtenerCatalogos(turno?: ApiSchoolGroupShift): Promise<Catalogos> {
+  const clave = turno ?? 'ALL'
+  const existente = catalogosPromises.get(clave)
+  if (existente) return existente
+
+  const solicitud = Promise.all([
+    gradesApi.list(),
+    turno
+      ? schoolGroupsApi.list(turno)
+      : Promise.all([schoolGroupsApi.list('M'), schoolGroupsApi.list('V')]).then((grupos) =>
+          grupos.flat()
+        ),
+  ])
+    .then(([grados, grupos]) => ({ grados, grupos }))
+    .catch((error) => {
+      catalogosPromises.delete(clave)
+      throw error
+    })
+
+  catalogosPromises.set(clave, solicitud)
+  return solicitud
 }
 
 export function etiquetaGrado(catalogos: Catalogos, gradeId: number): string {
@@ -52,6 +64,10 @@ export function turnoDesdeApi(shift: ApiShift): string {
 
 export function turnoHaciaApi(turno: string): ApiShift {
   return turno.toLowerCase().startsWith('vesp') ? 'AFTERNOON' : 'MORNING'
+}
+
+export function turnoCatalogoDesdeApi(turno: string): ApiSchoolGroupShift {
+  return turno.toLowerCase().startsWith('vesp') ? 'V' : 'M'
 }
 
 export interface EstudianteApiDetalle {

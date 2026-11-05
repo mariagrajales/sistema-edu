@@ -27,7 +27,7 @@ export const textosPaso1 = {
     eyebrow: 'REGISTRO CIVIL Y ADMISIÓN',
     titulo: 'Identificación y Datos Personales',
     descripcion:
-      'Capture la identidad oficial del alumno y reserve su matrícula institucional para el ciclo activo.',
+      'Capture la identidad oficial del alumno y su matrícula institucional vigente.',
   },
   secciones: {
     identidad: {
@@ -62,8 +62,8 @@ export const textosPaso1 = {
     sexo: 'Sexo / Género Registrado',
     grado: 'Grado y Grupo Asignado',
     turno: 'Turno Escolar',
-    matricula: 'Matrícula Oficial / Folio',
-    matriculaEtiqueta: 'GENERADO SEE',
+    matricula: 'Matrícula Oficial',
+    matriculaEtiqueta: 'CAPTURA MANUAL',
     confirmarDiscrepancia: 'Confirmo que la fecha y el sexo no coinciden con la CURP.',
     advertenciaDiscrepancia:
       'La fecha de nacimiento o el sexo no coinciden con la CURP. Confirme la discrepancia para continuar.',
@@ -82,7 +82,7 @@ export const textosPaso2 = {
   etiqueta: 'EXPEDIENTE ÚNICO DE ADMISIÓN E INCLUSIÓN',
   titulo: 'Paso 2: Información del Tutor Legal y Datos Clínicos Básicos',
   estudiante: (nombre: string, matricula: string) =>
-    `Estudiante: ${nombre} • Matrícula Provisional: ${matricula}`,
+    `Estudiante: ${nombre} • Matrícula: ${matricula}`,
   secciones: {
     tutor: {
       titulo: '1. Datos del Padre, Madre o Tutor Responsable',
@@ -238,6 +238,7 @@ export const dialogosAlta = {
 
 export const erroresAlta = {
   requerido: 'Este campo es obligatorio.',
+  matricula: 'Ingrese la matrícula oficial del alumno.',
   nombres: 'Ingrese el nombre o nombres del estudiante.',
   apellidoPaterno: 'Ingrese el primer apellido.',
   nombreInvalido: 'Use solo letras, acentos, ñ, espacios, apóstrofe o guion.',

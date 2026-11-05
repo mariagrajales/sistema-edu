@@ -23,10 +23,10 @@ export function TopInfoBar({
     <header className="flex flex-col gap-4 rounded-[var(--radius-lg)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-sm)] md:flex-row md:items-center md:justify-between md:gap-6 md:px-5">
       <div className="flex items-center gap-3">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-logo)]">
-          <Icon name="hat" size={20} color="#FFFFFF" />
+          <Icon name="graduation-cap" size={20} color="#FFFFFF" />
         </div>
-        <div className="flex min-w-0 flex-col gap-0.5">
-          <span className="text-base font-bold leading-tight">{cycle}</span>
+        <div className="flex min-w-0 flex-col gap-0.5 border-l-4 border-l-[var(--color-forest)] pl-3">
+          <span className="login-institutional-heading text-base font-bold leading-tight">{cycle}</span>
           <span className="text-sm">
             {zone} • {plantelKey}
           </span>

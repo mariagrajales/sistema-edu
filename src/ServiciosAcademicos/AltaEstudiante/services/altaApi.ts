@@ -1,10 +1,16 @@
 import { ApiError } from '../../../utils/services/apiClient'
-import { obtenerCatalogos, idGrado, idGrupo, turnoHaciaApi } from '../../../utils/services/catalogosApi'
+import {
+  obtenerCatalogos,
+  idGrado,
+  idGrupo,
+  turnoCatalogoDesdeApi,
+  turnoHaciaApi,
+} from '../../../utils/services/catalogosApi'
 import { studentsApi, type ApiStudent } from '../../../utils/services/sigeanApi'
 import type { AltaBorrador } from '../types'
 
 export async function registrarEstudianteApi(borrador: AltaBorrador): Promise<ApiStudent | null> {
-  const catalogos = await obtenerCatalogos()
+  const catalogos = await obtenerCatalogos(turnoCatalogoDesdeApi(borrador.asignacion.turno))
   const gradeId = idGrado(catalogos, borrador.asignacion.grado)
   const schoolGroupId = idGrupo(catalogos, borrador.asignacion.grupo)
   if (!gradeId || !schoolGroupId) {
@@ -16,7 +22,7 @@ export async function registrarEstudianteApi(borrador: AltaBorrador): Promise<Ap
   const apellidos = `${borrador.identificacion.apellidoPaterno} ${borrador.identificacion.apellidoMaterno}`.trim()
   try {
     return await studentsApi.create({
-      enrollmentNumber: borrador.matriculaProvisional,
+      enrollmentNumber: borrador.matriculaProvisional.trim(),
       firstName: borrador.identificacion.nombres.trim(),
       lastName: apellidos,
       gradeId,

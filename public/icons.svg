@@ -25,7 +25,7 @@
     <path d="M12 3 2 9l10 6 10-6-10-6ZM2 17v4h20v-4M12 15v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
   </symbol>
   <symbol id="person" viewBox="0 0 24 24">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M12 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M20 21a8 8 0 0 0-16 0M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
   </symbol>
   <symbol id="at" viewBox="0 0 24 24">
     <path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20ZM12 8a4 4 0 0 0 0 8 4 4 0 0 0 0-8Zm0 8v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

@@ -27,7 +27,7 @@ export function LoginForm({ form }: LoginFormProps) {
   const password = loginContent.loginCard.password
 
   return (
-    <form className="flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
+    <form className="flex flex-col gap-7" onSubmit={handleSubmit} noValidate>
       <EmailField
         label={email.label}
         name="email"
@@ -36,7 +36,7 @@ export function LoginForm({ form }: LoginFormProps) {
         value={values.email}
         onChange={(e) => setEmail(e.target.value)}
         helperText={email.helperText}
-        helperIcon="shield"
+        helperTextClassName="text-xs leading-relaxed text-[var(--color-text-placeholder)]"
         error={errors.email}
       />
 
@@ -63,7 +63,6 @@ export function LoginForm({ form }: LoginFormProps) {
       <PrimaryButton
         label={loginContent.loginCard.submit}
         type="submit"
-        leadingIcon="key"
         trailingIcon="arrow-right"
         loading={isSubmitting}
       />

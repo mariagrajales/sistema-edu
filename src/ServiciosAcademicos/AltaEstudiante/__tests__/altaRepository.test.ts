@@ -7,19 +7,14 @@ import {
   listarEstudiantesAlta,
 } from '../services/altaRepository'
 
-function numeroMatricula(matricula: string): number {
-  return Number(matricula.slice(-3))
-}
-
 describe('repositorio de altas en memoria', () => {
-  it('reserva matrículas consecutivas para borradores nuevos', async () => {
+  it('crea borradores sin asignar automáticamente la matrícula', async () => {
     const primero = await crearBorrador()
     const segundo = await crearBorrador()
 
     expect(primero.id).not.toBe(segundo.id)
-    expect(numeroMatricula(segundo.matriculaProvisional)).toBe(
-      numeroMatricula(primero.matriculaProvisional) + 1
-    )
+    expect(primero.matriculaProvisional).toBe('')
+    expect(segundo.matriculaProvisional).toBe('')
   })
 
   it('finaliza una sola vez aunque se repita la confirmación', async () => {

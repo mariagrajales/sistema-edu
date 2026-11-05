@@ -51,6 +51,8 @@ export interface ApiSchoolGroup {
   letter: string
 }
 
+export type ApiSchoolGroupShift = 'M' | 'V'
+
 export interface ApiStudent {
   id: number
   enrollmentNumber: string
@@ -160,7 +162,8 @@ export const gradesApi = {
 }
 
 export const schoolGroupsApi = {
-  list: (signal?: AbortSignal) => apiRequest<ApiSchoolGroup[]>('/v1/school-groups', { signal }),
+  list: (shift?: ApiSchoolGroupShift, signal?: AbortSignal) =>
+    apiRequest<ApiSchoolGroup[]>(`/v1/school-groups${query({ shift })}`, { signal }),
 }
 
 export const studentsApi = {

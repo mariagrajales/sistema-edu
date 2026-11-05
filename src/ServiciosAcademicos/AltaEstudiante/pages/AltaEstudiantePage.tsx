@@ -33,6 +33,8 @@ import {
 import { renapoService } from '../services/renapoService'
 import { registrarEstudianteApi } from '../services/altaApi'
 import { ApiError } from '../../../utils/services/apiClient'
+import { gradesApi, schoolGroupsApi, type ApiSchoolGroupShift } from '../../../utils/services/sigeanApi'
+import { mapAuthError } from '../../../Login/services/authService'
 import { useEstudiantesAlta } from '../hooks/useEstudiantesAlta'
 import {
   idCampo,
@@ -45,6 +47,8 @@ import type {
   ErrorAlta,
   RegistroAltaResultado,
   ResumenRegistro,
+  GrupoAlta as GrupoAltaOpcion,
+  OpcionCatalogo,
 } from '../types'
 
 type Paso = 1 | 2 | 3
@@ -102,6 +106,10 @@ function erroresVerificacionCurp(draft: AltaBorrador): ErrorAlta[] {
 
 export function AltaEstudiantePage() {
   const { estudiantes: estudiantesAlta } = useEstudiantesAlta()
+  const [gradosDisponibles, setGradosDisponibles] = useState<OpcionCatalogo[]>([])
+  const [gruposDisponibles, setGruposDisponibles] = useState<GrupoAltaOpcion[]>([])
+  const [catalogosCargando, setCatalogosCargando] = useState(false)
+  const [errorCatalogos, setErrorCatalogos] = useState<string | null>(null)
   const [draft, setDraft] = useState<AltaBorrador | null>(null)
   const draftRef = useRef<AltaBorrador | null>(null)
   const versionRef = useRef(0)
@@ -128,6 +136,54 @@ export function AltaEstudiantePage() {
   const [resultado, setResultado] = useState<RegistroAltaResultado | null>(null)
   const [resumenFinal, setResumenFinal] = useState<ResumenRegistro | null>(null)
   const [intentoCarga, setIntentoCarga] = useState(0)
+
+  useEffect(() => {
+    let activo = true
+    const turno = draft?.asignacion.turno
+    if (!turno) {
+      setGruposDisponibles([])
+      setCatalogosCargando(false)
+      setErrorCatalogos(null)
+      return () => {
+        activo = false
+      }
+    }
+
+    const shift: ApiSchoolGroupShift = turno.toLowerCase().startsWith('vesp') ? 'V' : 'M'
+    setCatalogosCargando(true)
+    setErrorCatalogos(null)
+    void Promise.all([gradesApi.list(), schoolGroupsApi.list(shift)])
+      .then(([grados, grupos]) => {
+        if (!activo) return
+        const gradosOrdenados = grados.slice().sort((a, b) => a.gradeNumber - b.gradeNumber)
+        const gruposOrdenados = grupos.slice().sort((a, b) => a.letter.localeCompare(b.letter))
+        setGradosDisponibles(
+          gradosOrdenados.map((grado) => ({
+            value: `${grado.gradeNumber}°`,
+            label: `${grado.gradeNumber}° Grado`,
+          }))
+        )
+        setGruposDisponibles(
+          gradosOrdenados.flatMap((grado) =>
+            gruposOrdenados.map((grupo) => ({
+              value: `${grado.gradeNumber}°|${grupo.letter}`,
+              label: `${grado.gradeNumber}° Grado - Grupo ${grupo.letter}`,
+              grado: `${grado.gradeNumber}°`,
+              grupo: grupo.letter,
+            }))
+          )
+        )
+      })
+      .catch((error: unknown) => {
+        if (activo) setErrorCatalogos(mapAuthError(error))
+      })
+      .finally(() => {
+        if (activo) setCatalogosCargando(false)
+      })
+    return () => {
+      activo = false
+    }
+  }, [draft?.asignacion.turno])
 
   const marcarSucio = useCallback((valor: boolean) => {
     sucioRef.current = valor
@@ -475,7 +531,13 @@ export function AltaEstudiantePage() {
         )
         return
       }
-      await registrarEstudianteApi(actual)
+      const estudianteRegistrado = await registrarEstudianteApi(actual)
+      if (!estudianteRegistrado) {
+        setErrorRegistro(
+          `La matrícula ${actual.matriculaProvisional.trim()} ya está registrada. Verifique la matrícula e intente nuevamente.`
+        )
+        return
+      }
       const registro = await finalizarAlta(actual.id)
       setResumenFinal(resumen)
       setResultado(registro)
@@ -645,6 +707,10 @@ export function AltaEstudiantePage() {
             <Paso1Identificacion
               draft={draft}
               errores={errores}
+              gradosDisponibles={gradosDisponibles}
+              gruposDisponibles={gruposDisponibles}
+              catalogosCargando={catalogosCargando}
+              errorCatalogos={errorCatalogos}
               verificando={verificando}
               duplicado={duplicado}
               guardando={guardando}

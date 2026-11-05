@@ -4,7 +4,7 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box; //hola
+  box-sizing: border-box;
 }
 
 body {
@@ -88,4 +88,24 @@ input:disabled,
 select:disabled,
 textarea:disabled {
   cursor: not-allowed;
+}
+
+.login-page {
+  --font-login-body: 'Inter', sans-serif;
+  --font-login-heading: 'Manrope', sans-serif;
+  font-family: var(--font-login-body);
+}
+
+.login-page h1,
+.login-page h2,
+.login-page h3,
+.login-page h4,
+.login-page h5,
+.login-page h6,
+.login-page .login-institutional-heading {
+  font-family: var(--font-login-heading);
+}
+
+.login-page .login-subtitle {
+  font-family: var(--font-login-body);
 }

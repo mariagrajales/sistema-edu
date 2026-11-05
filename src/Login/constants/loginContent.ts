@@ -11,10 +11,10 @@ export const loginContent = {
     platformLabel: "PLATAFORMA OFICIAL DE INCLUSIÓN",
     institutionName: 'Secundaria Federal "Adolfo López Mateos"',
     subsystem: "Subsistema de Educación Secundaria Técnica y General",
-    heading: "Iniciar Sesión en NexusEdu",
+    heading: "Iniciar sesión",
     subtitle: "Portal unificado para Docentes, Psicología Escolar (SEE), Asesoría y Directivos.",
     email: {
-      label: "Correo Institucional (@edomex.nuevaescuela.mx o @sep.gob.mx)",
+      label: "Correo Institucional",
       placeholder: "ejemplo.docente@sep.gob.mx",
       leadingIcon: "at",
       helperText: "Utilice exclusivamente su credencial digital autorizada por la plantilla directiva.",
@@ -27,7 +27,7 @@ export const loginContent = {
       leadingIcon: "lock",
     },
     remember: "Recordar sesión en este equipo institucional de trabajo",
-    submit: "Ingresar al Portal NexusEdu",
+    submit: "Ingresar al portal",
     forgotPassword: "¿Olvidó su contraseña o requiere desbloqueo de cuenta?",
     notices: [
       {
@@ -63,7 +63,7 @@ export const loginContent = {
     },
     featureCards: [
       {
-        icon: "brain",
+        icon: "star",
         background: "sky",
         title: "Atención Neurodivergente",
         subtitle: "Enfoque DUA y Fortalezas",
