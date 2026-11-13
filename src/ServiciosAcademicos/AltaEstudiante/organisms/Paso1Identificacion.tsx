@@ -1,15 +1,18 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Icon } from '../../../utils/atoms/Icon'
 import { escuela } from '../../../Portal/shared/constants/escuela'
 import { cn } from '../../../utils/cn'
 import {
   altaConfig,
-  grados,
-  grupos,
   meses,
   sexos,
   turnos,
 } from '../constants/altaConfig'
+import {
+  obtenerCatalogos,
+  turnoDesdeApi,
+  type Catalogos,
+} from '../../../utils/services/catalogosApi'
 import { textosPaso1 } from '../constants/altaContent'
 import {
   CampoAlta,
@@ -37,7 +40,7 @@ import {
 } from '../utils/edad'
 import { curpCoincideCon, normalizarCurp, parsearCurp } from '../utils/curp'
 import { idCampo } from '../validation/altaSchema'
-import type { AltaBorrador, ErrorAlta } from '../types'
+import type { AltaBorrador, ErrorAlta, GrupoAlta as OpcionGrupo, OpcionCatalogo } from '../types'
 
 interface Paso1Props {
   draft: AltaBorrador
@@ -136,6 +139,50 @@ export function Paso1Identificacion({
       },
     }))
   }
+
+  const [catalogos, setCatalogos] = useState<Catalogos | null>(null)
+  const [errorCatalogos, setErrorCatalogos] = useState(false)
+
+  useEffect(() => {
+    let activo = true
+    obtenerCatalogos()
+      .then((resultado) => {
+        if (activo) setCatalogos(resultado)
+      })
+      .catch(() => {
+        if (activo) setErrorCatalogos(true)
+      })
+    return () => {
+      activo = false
+    }
+  }, [])
+
+  const grados = useMemo<OpcionCatalogo[]>(
+    () =>
+      [...(catalogos?.grados ?? [])]
+        .sort((a, b) => a.gradeNumber - b.gradeNumber)
+        .map((grado) => ({ value: `${grado.gradeNumber}°`, label: `${grado.gradeNumber}° Grado` })),
+    [catalogos]
+  )
+
+  const grupos = useMemo<Array<OpcionGrupo & { turno: string }>>(
+    () =>
+      grados.flatMap((grado) =>
+        [...(catalogos?.grupos ?? [])]
+          .sort((a, b) => a.letter.localeCompare(b.letter))
+          .map((grupo) => {
+            const turno = turnoDesdeApi(grupo.shift)
+            return {
+              value: `${grado.value}|${grupo.letter}`,
+              label: `${grado.value} Grado - Grupo ${grupo.letter} · ${turno}`,
+              grado: grado.value,
+              grupo: grupo.letter,
+              turno,
+            }
+          })
+      ),
+    [catalogos, grados]
+  )
 
   const grupoSeleccionado = grupos.find(
     (grupo) =>
@@ -545,6 +592,7 @@ export function Paso1Identificacion({
                     ...actual.asignacion,
                     grado: grupo?.grado ?? '',
                     grupo: grupo?.grupo ?? '',
+                    turno: grupo?.turno ?? actual.asignacion.turno,
                   },
                 }))
               }}
@@ -555,11 +603,21 @@ export function Paso1Identificacion({
                 errorGrado
               )}
             >
-              <option value=''>Seleccione grado y grupo</option>
+              <option value=''>
+                {catalogos
+                  ? 'Seleccione grado y grupo'
+                  : errorCatalogos
+                    ? 'No fue posible cargar los grupos'
+                    : 'Cargando grupos...'}
+              </option>
               {grados.map((grado) => (
                 <optgroup key={grado.value} label={grado.label}>
                   {grupos
-                    .filter((grupo) => grupo.grado === grado.value)
+                    .filter(
+                      (grupo) =>
+                        grupo.grado === grado.value &&
+                        (!draft.asignacion.turno || grupo.turno === draft.asignacion.turno)
+                    )
                     .map((grupo) => (
                       <option key={grupo.value} value={grupo.value}>
                         {grupo.label}
@@ -587,7 +645,17 @@ export function Paso1Identificacion({
               onChange={(valor) =>
                 onCambio((actual) => ({
                   ...actual,
-                  asignacion: { ...actual.asignacion, turno: valor },
+                  asignacion: {
+                    ...actual.asignacion,
+                    turno: valor,
+                    ...(grupos.find(
+                      (grupo) =>
+                        grupo.grado === actual.asignacion.grado &&
+                        grupo.grupo === actual.asignacion.grupo
+                    )?.turno === valor
+                      ? {}
+                      : { grado: '', grupo: '' }),
+                  },
                 }))
               }
               invalid={Boolean(errorDe('asignacion.turno'))}
@@ -611,21 +679,25 @@ export function Paso1Identificacion({
           <CampoAlta
             id={idCampo('matriculaProvisional')}
             etiqueta={textosPaso1.campos.matricula}
-            icono='lock'
-            ayuda='Se confirma al finalizar el registro y no puede modificarse.'
-            extra={
-              <span className='inline-flex items-center gap-1 rounded-full bg-[var(--sa-field)] px-2 py-1 text-[10px] font-extrabold tracking-[0.06em] text-[var(--sa-muted)] uppercase'>
-                <Icon name='stamp' size={12} color='currentColor' />
-                {textosPaso1.campos.matriculaEtiqueta}
-              </span>
-            }
+            requerido
+            error={errorDe('matriculaProvisional')}
+            ayuda={textosPaso1.campos.matriculaAyuda}
           >
             <input
               id={idCampo('matriculaProvisional')}
               value={draft.matriculaProvisional}
-              readOnly
-              aria-describedby={`${idCampo('matriculaProvisional')}-ayuda`}
-              className={cn(clasesInput, 'cursor-default bg-[var(--sa-field)] font-mono')}
+              onChange={(evento) => {
+                const valor = evento.target.value
+                onCambio((actual) => ({ ...actual, matriculaProvisional: valor }))
+              }}
+              autoComplete='off'
+              aria-invalid={Boolean(errorDe('matriculaProvisional'))}
+              aria-describedby={descripcionCampo(
+                idCampo('matriculaProvisional'),
+                textosPaso1.campos.matriculaAyuda,
+                errorDe('matriculaProvisional')
+              )}
+              className={cn(clasesInput, 'font-mono')}
             />
           </CampoAlta>
         </div>

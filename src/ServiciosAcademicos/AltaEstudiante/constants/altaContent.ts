@@ -62,8 +62,8 @@ export const textosPaso1 = {
     sexo: 'Sexo / Género Registrado',
     grado: 'Grado y Grupo Asignado',
     turno: 'Turno Escolar',
-    matricula: 'Matrícula Oficial / Folio',
-    matriculaEtiqueta: 'GENERADO SEE',
+    matricula: 'Matrícula del Alumno',
+    matriculaAyuda: 'Escriba la matrícula oficial asignada por la institución.',
     confirmarDiscrepancia: 'Confirmo que la fecha y el sexo no coinciden con la CURP.',
     advertenciaDiscrepancia:
       'La fecha de nacimiento o el sexo no coinciden con la CURP. Confirme la discrepancia para continuar.',
@@ -82,7 +82,7 @@ export const textosPaso2 = {
   etiqueta: 'EXPEDIENTE ÚNICO DE ADMISIÓN E INCLUSIÓN',
   titulo: 'Paso 2: Información del Tutor Legal y Datos Clínicos Básicos',
   estudiante: (nombre: string, matricula: string) =>
-    `Estudiante: ${nombre} • Matrícula Provisional: ${matricula}`,
+    `Estudiante: ${nombre} • Matrícula: ${matricula}`,
   secciones: {
     tutor: {
       titulo: '1. Datos del Padre, Madre o Tutor Responsable',
@@ -249,6 +249,8 @@ export const erroresAlta = {
   sexo: 'Seleccione una opción de sexo registrado.',
   grado: 'Seleccione el grado y grupo.',
   turno: 'Seleccione el turno escolar.',
+  matricula: 'Ingrese la matrícula del alumno.',
+  matriculaDuplicada: 'Esta matrícula ya está registrada en el sistema.',
   tutorNombre: 'Ingrese el nombre completo del tutor legal.',
   parentesco: 'Seleccione el parentesco o representación.',
   telefono: 'El teléfono debe tener 10 dígitos.',

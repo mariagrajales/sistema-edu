@@ -37,7 +37,6 @@ const memoria = {
   notificaciones: new Map<string, NotificacionAlta>(),
   auditoria: new Map<string, AuditoriaAlta>(),
   resultados: new Map<string, RegistroAltaResultado>(),
-  secuencia: altaConfig.matriculaInicial,
 }
 
 let dbPromise: Promise<IDBDatabase> | null = null
@@ -137,34 +136,15 @@ function nuevoId(prefijo: string): string {
   return `${prefijo}-${aleatorio}`
 }
 
-async function reservarMatricula(): Promise<string> {
-  if (modoMemoria) {
-    memoria.secuencia += 1
-    return `NX-${altaConfig.anioCiclo}-${String(memoria.secuencia).padStart(3, '0')}`
-  }
-  const db = await abrirDb()
-  const transaccion = db.transaction(STORES.meta, 'readwrite')
-  const store = transaccion.objectStore(STORES.meta)
-  const actual = (await requestToPromise(
-    store.get('matricula') as IDBRequest<{ clave: string; valor: number } | undefined>
-  )) ?? { clave: 'matricula', valor: altaConfig.matriculaInicial }
-  const siguiente = Math.max(actual.valor, altaConfig.matriculaInicial) + 1
-  store.put({ clave: 'matricula', valor: siguiente })
-  await transaccionCompleta(transaccion)
-  return `NX-${altaConfig.anioCiclo}-${String(siguiente).padStart(3, '0')}`
-}
-
 export async function crearBorrador(): Promise<AltaBorrador> {
   try {
-    const matricula = await reservarMatricula()
-    const borrador = crearBorradorInicial(nuevoId('alta'), matricula)
+    const borrador = crearBorradorInicial(nuevoId('alta'))
     await escribir(STORES.borradores, borrador)
     notificarCambio()
     return borrador
   } catch {
     modoMemoria = true
-    const matricula = await reservarMatricula()
-    const borrador = crearBorradorInicial(nuevoId('alta'), matricula)
+    const borrador = crearBorradorInicial(nuevoId('alta'))
     await escribir(STORES.borradores, borrador)
     notificarCambio()
     return borrador

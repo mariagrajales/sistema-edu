@@ -7,21 +7,45 @@ import { CheckboxCard } from '../molecules/CheckboxCard'
 import { ActionCard } from '../atoms/ActionCard'
 import type { AfectaAprendizaje, CanalizacionStep, Manifestacion, PrioridadId } from '../types'
 
+export interface CanalizacionEnvio {
+  alumnoId: number
+  asignatura: string
+  afectaAprendizaje: boolean
+  manifestaciones: Manifestacion['id'][]
+  descripcion: string
+  motivo: string
+  prioridad: Exclude<PrioridadId, null>
+}
+
+export interface AlumnoOpcion {
+  id: number
+  etiqueta: string
+}
+
 interface CanalizacionesFormProps {
-  onEnviar?: () => void
+  alumnos?: AlumnoOpcion[]
+  enviando?: boolean
+  errorEnvio?: string | null
+  onEnviar?: (datos: CanalizacionEnvio) => void
   onGuardarBorrador?: () => void
   onCancelar?: () => void
 }
 
 export function CanalizacionesForm({
+  alumnos = [],
+  enviando = false,
+  errorEnvio = null,
   onEnviar,
   onGuardarBorrador,
   onCancelar,
 }: CanalizacionesFormProps) {
   const [step, setStep] = useState<CanalizacionStep>('paso1')
+  const [alumnoId, setAlumnoId] = useState('')
+  const [asignatura, setAsignatura] = useState('')
   const [afecta, setAfecta] = useState<AfectaAprendizaje>(null)
   const [manifestaciones, setManifestaciones] = useState<Manifestacion[]>(manifestacionesIniciales)
   const [descripcion, setDescripcion] = useState('')
+  const [motivo, setMotivo] = useState('')
   const [prioridad, setPrioridad] = useState<PrioridadId>(null)
   const [errores, setErrores] = useState<string[]>([])
 
@@ -35,21 +59,39 @@ export function CanalizacionesForm({
 
   const handleEnviar = () => {
     const nuevosErrores: string[] = []
+    if (!alumnoId) {
+      nuevosErrores.push('Debe seleccionar al alumno.')
+    }
+    if (afecta === null) {
+      nuevosErrores.push('Indique si la situación afecta el aprendizaje.')
+    }
     if (descripcion.trim().length === 0) {
       nuevosErrores.push('La descripción de la situación observada es obligatoria.')
+    }
+    if (motivo.trim().length === 0) {
+      nuevosErrores.push('El motivo de la canalización es obligatorio.')
     }
     if (prioridad === null) {
       nuevosErrores.push('Debe seleccionar un nivel de prioridad.')
     }
     setErrores(nuevosErrores)
-    if (nuevosErrores.length === 0) {
+    if (nuevosErrores.length === 0 && prioridad !== null) {
+      const datos: CanalizacionEnvio = {
+        alumnoId: Number(alumnoId),
+        asignatura: asignatura.trim(),
+        afectaAprendizaje: afecta === 'si',
+        manifestaciones: manifestaciones.filter((m) => m.checked).map((m) => m.id),
+        descripcion: descripcion.trim(),
+        motivo: motivo.trim(),
+        prioridad,
+      }
       if (prioridad === 'urgente') {
         if (window.confirm('¿Está seguro de enviar como Urgente Inmediata? Esta acción notifica de inmediato a Dirección y SEE.')) {
-          onEnviar?.()
+          onEnviar?.(datos)
         }
         return
       }
-      onEnviar?.()
+      onEnviar?.(datos)
     }
   }
 
@@ -110,8 +152,19 @@ export function CanalizacionesForm({
                 </div>
                 <div className="flex min-h-[52px] items-center gap-2 rounded-xl border border-[var(--sa-input-border)] bg-[var(--sa-card)] px-3 shadow-[var(--shadow-sm)]">
                   <Icon name="users" size={18} color="var(--sa-accent)" />
-                  <span className="truncate text-base">{seccion1.alumnoValue}</span>
-                  <Icon name="chevron-down" size={16} color="var(--sa-muted)" className="ml-auto" />
+                  <select
+                    aria-label={seccion1.alumnoLabel}
+                    value={alumnoId}
+                    onChange={(e) => setAlumnoId(e.target.value)}
+                    className="min-w-0 flex-1 bg-transparent text-base focus-visible:outline-none"
+                  >
+                    <option value="">{alumnos.length ? 'Seleccione al alumno…' : 'Sin alumnos asignados'}</option>
+                    {alumnos.map((alumno) => (
+                      <option key={alumno.id} value={alumno.id}>
+                        {alumno.etiqueta}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
@@ -124,8 +177,14 @@ export function CanalizacionesForm({
                 </div>
                 <div className="flex min-h-[52px] items-center gap-2 rounded-xl border border-[var(--sa-input-border)] bg-[var(--sa-card)] px-3 shadow-[var(--shadow-sm)]">
                   <Icon name="book-open" size={18} color="var(--sa-accent)" />
-                  <span className="truncate text-base">{seccion1.asignaturaValue}</span>
-                  <Icon name="chevron-down" size={16} color="var(--sa-muted)" className="ml-auto" />
+                  <input
+                    aria-label={seccion1.asignaturaLabel}
+                    value={asignatura}
+                    onChange={(e) => setAsignatura(e.target.value)}
+                    placeholder={seccion1.asignaturaValue}
+                    maxLength={100}
+                    className="min-w-0 flex-1 bg-transparent text-base focus-visible:outline-none"
+                  />
                 </div>
               </div>
             </div>
@@ -213,6 +272,28 @@ export function CanalizacionesForm({
               </div>
             </div>
 
+            <div className="mt-6">
+              <label htmlFor="motivo" className="text-base font-bold">
+                {seccion2.motivoLabel} <span className="text-[#C62828]">*</span>
+              </label>
+              <textarea
+                id="motivo"
+                value={motivo}
+                onChange={(e) => setMotivo(e.target.value)}
+                className="mt-2 min-h-[100px] w-full resize-y rounded-xl border border-[var(--sa-input-border)] bg-[var(--sa-field)] px-4 py-3 text-base leading-relaxed text-[var(--color-text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sa-accent)]"
+                maxLength={seccion2.maxCaracteres}
+                aria-required="true"
+              />
+              <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <span className="text-base text-[var(--sa-muted)]">
+                  {seccion2.motivoAyuda}
+                </span>
+                <span className="text-base font-bold text-[var(--color-text-primary)]">
+                  {motivo.length} / {seccion2.maxCaracteres} caracteres
+                </span>
+              </div>
+            </div>
+
             <fieldset className="mt-6">
               <legend className="text-base font-bold">
                 {seccion2.prioridadTitulo} <span className="text-[#C62828]">*</span>
@@ -232,9 +313,9 @@ export function CanalizacionesForm({
               </div>
             </fieldset>
 
-            {errores.length > 0 && (
+            {(errores.length > 0 || errorEnvio) && (
               <div role="alert" className="mt-4 rounded-xl border border-[#C62828] bg-[#FFF4F4] p-3">
-                {errores.map((e, i) => (
+                {[...errores, ...(errorEnvio ? [errorEnvio] : [])].map((e, i) => (
                   <p key={i} className="text-base font-bold text-[#C62828]">
                     {e}
                   </p>
@@ -266,10 +347,11 @@ export function CanalizacionesForm({
           <button
             type="button"
             onClick={handleEnviar}
-            className="inline-flex min-h-[56px] items-center justify-center gap-2 rounded-xl bg-[var(--color-forest)] px-5 text-base font-bold text-[var(--sa-on-accent)] shadow-[var(--shadow-sm)] hover:brightness-95 md:order-3 md:ml-auto md:w-auto"
+            disabled={enviando}
+            className="inline-flex disabled:cursor-not-allowed disabled:opacity-60 min-h-[56px] items-center justify-center gap-2 rounded-xl bg-[var(--color-forest)] px-5 text-base font-bold text-[var(--sa-on-accent)] shadow-[var(--shadow-sm)] hover:brightness-95 md:order-3 md:ml-auto md:w-auto"
           >
             <Icon name="share" size={18} color="currentColor" />
-            {acciones.enviar}
+            {enviando ? 'Enviando…' : acciones.enviar}
           </button>
         </div>
       </section>

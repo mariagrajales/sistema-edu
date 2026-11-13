@@ -5,7 +5,6 @@ import type {
   DocumentoAlta,
   DocumentoCatalogo,
   EspecialistaSEE,
-  GrupoAlta,
   InstitucionSalud,
   OpcionCatalogo,
   TurnoAlta,
@@ -23,7 +22,6 @@ export const altaConfig = {
   diasPlazoDocumento: 15,
   maxAlergias: 500,
   autoguardadoMs: 30_000,
-  matriculaInicial: 881,
   pasos: [
     {
       id: 1,
@@ -42,24 +40,6 @@ export const altaConfig = {
     },
   ],
 } as const
-
-export const grados: OpcionCatalogo[] = [
-  { value: '1°', label: '1° Grado' },
-  { value: '2°', label: '2° Grado' },
-  { value: '3°', label: '3° Grado' },
-]
-
-export const grupos: GrupoAlta[] = [
-  { value: '1°|A', label: '1° Grado - Grupo A', grado: '1°', grupo: 'A' },
-  { value: '1°|B', label: '1° Grado - Grupo B', grado: '1°', grupo: 'B' },
-  { value: '1°|K', label: '1° Grado - Grupo K', grado: '1°', grupo: 'K' },
-  { value: '2°|A', label: '2° Grado - Grupo A', grado: '2°', grupo: 'A' },
-  { value: '2°|B', label: '2° Grado - Grupo B', grado: '2°', grupo: 'B' },
-  { value: '2°|K', label: '2° Grado - Grupo K', grado: '2°', grupo: 'K' },
-  { value: '3°|A', label: '3° Grado - Grupo A', grado: '3°', grupo: 'A' },
-  { value: '3°|B', label: '3° Grado - Grupo B', grado: '3°', grupo: 'B' },
-  { value: '3°|K', label: '3° Grado - Grupo K', grado: '3°', grupo: 'K' },
-]
 
 export const turnos: TurnoAlta[] = [
   { value: 'Matutino', label: 'Turno Matutino', horario: '07:30 a 13:40 h' },

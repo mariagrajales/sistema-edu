@@ -110,8 +110,10 @@ export const canalizacionContent = {
     descripcionPlaceholder:
       'Durante la actividad grupal de hoy, el alumno mostró signos de saturación por el ruido circundante: cubrió sus oídos y dejó de responder a las preguntas del equipo. Se le ofreció trasladarse al rincón de calma del aula y utilizar sus protectores auditivos de atenuación, logrando estabilizarse tras 15 minutos, aunque no retomó la lectura colectiva.',
     ayudaRedaccion: 'Redacción objetiva y libre de juicios de valor.',
+    motivoLabel: 'Motivo de la canalización:',
+    motivoAyuda: 'Explique por qué se solicita la intervención de Psicología.',
     prioridadTitulo: 'Nivel de Prioridad Sugerido para la Intervención: *',
-    maxCaracteres: 1000,
+    maxCaracteres: 500,
   },
   acciones: {
     cancelar: '← Cancelar / Volver',

@@ -31,6 +31,8 @@ import {
   obtenerBorrador,
 } from '../services/altaRepository'
 import { renapoService } from '../services/renapoService'
+import { registrarEstudianteApi } from '../services/altaApi'
+import { ApiError } from '../../../utils/services/apiClient'
 import { useEstudiantesAlta } from '../hooks/useEstudiantesAlta'
 import {
   idCampo,
@@ -473,6 +475,15 @@ export function AltaEstudiantePage() {
         )
         return
       }
+      const creado = await registrarEstudianteApi(actual)
+      if (!creado) {
+        setConfirmarDialogo(false)
+        setErrores([
+          { campo: 'matriculaProvisional', mensaje: erroresAlta.matriculaDuplicada, paso: 1 },
+        ])
+        setPaso(1)
+        return
+      }
       const registro = await finalizarAlta(actual.id)
       setResumenFinal(resumen)
       setResultado(registro)
@@ -481,8 +492,8 @@ export function AltaEstudiantePage() {
       setErrores([])
       marcarSucio(false)
       window.history.replaceState(null, '', HASH_ALTA)
-    } catch {
-      setErrorRegistro(dialogosAlta.errorRegistro)
+    } catch (error) {
+      setErrorRegistro(error instanceof ApiError ? error.message : dialogosAlta.errorRegistro)
     } finally {
       setRegistrando(false)
     }

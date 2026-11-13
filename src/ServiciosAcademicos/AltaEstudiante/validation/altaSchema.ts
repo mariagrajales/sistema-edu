@@ -188,6 +188,7 @@ function validarCondicionYDerivacion(
 
 const pasoSchema1 = z
   .object({
+    matriculaProvisional: z.string().trim().min(1, erroresAlta.matricula),
     identificacion: identificacionSchema,
     asignacion: asignacionSchema,
   })
@@ -231,6 +232,7 @@ const esquemas = {
 function construirEntrada(draft: AltaBorrador, paso: 1 | 2 | 3): unknown {
   if (paso === 1) {
     return {
+      matriculaProvisional: draft.matriculaProvisional,
       identificacion: draft.identificacion,
       asignacion: draft.asignacion,
     }
