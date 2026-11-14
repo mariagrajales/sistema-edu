@@ -8,7 +8,7 @@ export function BitacoraKpiGrid() {
     { titulo: 'GARANTÍA REGULATORIA', subtitulo: 'Cumplimiento Legal', valor: '100% Conforme', apoyo: 'Auditoría conforme a SEP, LGDNNA y normativas vigentes.', icono: 'check-circle', destacado: true },
   ]
   return (
-    <div className='grid gap-5 sm:grid-cols-2 xl:grid-cols-4'>
+    <div className='grid grid-cols-2 gap-3 xl:grid-cols-4'>
       {items.map((k, i) => (
         <KpiBitacora key={i} {...k} />
       ))}

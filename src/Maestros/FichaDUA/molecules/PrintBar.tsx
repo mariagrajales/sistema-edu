@@ -1,7 +1,11 @@
 import { Icon } from '../../../utils/atoms/Icon'
 import { fichaContent } from '../constants/fichaContent'
 
-export function PrintBar() {
+interface PrintBarProps {
+  onViewHistory: () => void
+}
+
+export function PrintBar({ onViewHistory }: PrintBarProps) {
   const { icon, title, subtitle, history, print } = fichaContent.print
 
   return (
@@ -22,6 +26,7 @@ export function PrintBar() {
       <div className="flex flex-wrap items-center gap-3 max-[899px]:w-full min-[900px]:flex-none">
         <button
           type="button"
+          onClick={onViewHistory}
           className="inline-flex h-11 grow shrink basis-full items-center justify-center gap-2 whitespace-nowrap rounded-[12px] border border-[var(--sa-border)] bg-[var(--sa-card)] px-[18px] text-sm font-bold text-[var(--color-text-primary)] hover:bg-[var(--sa-field)] min-[900px]:grow-0 min-[900px]:shrink-0 min-[900px]:basis-auto"
         >
           <Icon name={history.icon} size={16} color="currentColor" />

@@ -76,7 +76,7 @@ export const transferenciasContent = {
       titulo: 'Ordinaria',
       descripcion: 'Próximos 15 días hábiles',
       icon: 'calendar' as const,
-      barra: '#4A6075',
+      barra: 'var(--sa-slate)',
       plazoTexto: (fecha: string) => `Plazo: ${fecha}`,
     },
     {
@@ -84,7 +84,7 @@ export const transferenciasContent = {
       titulo: 'Prioritaria',
       descripcion: 'Atención en 48 horas',
       icon: 'bell' as const,
-      barra: '#7A4320',
+      barra: 'var(--sa-coffee)',
       plazoTexto: () => 'Plazo: 48 horas',
     },
     {

@@ -79,7 +79,7 @@ export const acuerdosLegales: AcuerdosLegales = {
   dictamen: {
     titulo: 'Dictamen de Acreditación y Ajustes Razonables',
     subtitulo: 'Marco jurídico: Artículo 41 Ley General de Educación',
-    chip: 'Vigente 2024-2025',
+    chip: 'Vigente 2026-2027',
     cajaTitulo: 'Declaratoria Oficial Institucional',
     parrafo: [
       { texto: 'En estricto cumplimiento al ' },

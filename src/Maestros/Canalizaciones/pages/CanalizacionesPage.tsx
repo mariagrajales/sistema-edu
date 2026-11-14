@@ -71,7 +71,7 @@ export function CanalizacionesPage() {
   }
 
   const handleGuardar = () => {
-    alert('Borrador guardado.')
+    setErrorEnvio('El servicio de borradores no está disponible.')
   }
 
   const handleCancelar = () => {

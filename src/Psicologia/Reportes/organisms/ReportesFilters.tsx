@@ -1,4 +1,5 @@
 import { Icon } from '../../../utils/atoms/Icon'
+import { escuela } from '../../../Portal/shared/constants/escuela'
 import { CampoFiltro, campoControlClass } from '../molecules/CampoFiltro'
 import { grupos, tiposDocumento } from '../constants/reportes'
 import type { TipoDocumento } from '../types'
@@ -29,7 +30,8 @@ export function ReportesFilters({
       <div className='grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4'>
         <CampoFiltro label='Ciclo Escolar Activo' icono='calendar'>
           <select value={ciclo} onChange={(event) => onCiclo(event.target.value)} className={campoControlClass}>
-            <option value='2024-2025'>Ciclo 2024-2025 (Semestre Actual)</option>
+            <option value={escuela.ciclo}>Ciclo {escuela.ciclo} (Semestre Actual)</option>
+            <option value='2024-2025'>Ciclo 2024-2025 (Histórico)</option>
             <option value='2023-2024'>Ciclo 2023-2024 (Histórico)</option>
           </select>
         </CampoFiltro>

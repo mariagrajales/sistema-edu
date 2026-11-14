@@ -1,4 +1,5 @@
 import { getSession } from '../../../Login/services/authService'
+import { escuela } from '../constants/escuela'
 import { Icon } from '../../../utils/atoms/Icon'
 import { roles } from '../constants/roles'
 import type { RoleKey } from '../types'
@@ -11,6 +12,7 @@ interface TopBarSEEProps {
   onBuscar: (valor: string) => void
   onOpenMenu: () => void
   placeholder?: string
+  mostrarBusqueda?: boolean
 }
 
 export function TopBarSEE({
@@ -21,6 +23,7 @@ export function TopBarSEE({
   onBuscar,
   onOpenMenu,
   placeholder,
+  mostrarBusqueda = true,
 }: TopBarSEEProps) {
   const config = roles[roleKey]
   const sesion = getSession()
@@ -50,20 +53,22 @@ export function TopBarSEE({
         <Icon name='menu' size={18} color='currentColor' />
       </button>
 
-      <div className='flex h-11 min-w-0 flex-1 items-center gap-2 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-field)] px-3'>
-        <Icon name='search' size={16} color='var(--sa-muted)' className='shrink-0' />
-        <input
-          value={busqueda}
-          onChange={(event) => onBuscar(event.target.value)}
-          placeholder={placeholderVisible}
-          aria-label={placeholderVisible}
-          className='h-full w-full min-w-0 bg-transparent text-[13px] outline-none placeholder:text-[var(--sa-muted)]'
-        />
-      </div>
+      {mostrarBusqueda ? (
+        <div className='flex h-11 min-w-0 flex-1 items-center gap-2 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-field)] px-3'>
+          <Icon name='search' size={16} color='var(--sa-muted)' className='shrink-0' />
+          <input
+            value={busqueda}
+            onChange={(event) => onBuscar(event.target.value)}
+            placeholder={placeholderVisible}
+            aria-label={placeholderVisible}
+            className='h-full w-full min-w-0 bg-transparent text-[13px] outline-none placeholder:text-[var(--sa-muted)]'
+          />
+        </div>
+      ) : null}
 
       <span className='inline-flex h-11 shrink-0 items-center gap-2 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-card)] px-3 text-[12px] font-semibold'>
         <Icon name='calendar' size={16} color='var(--sa-muted)' className='shrink-0' />
-        Ciclo 2024-2025
+        Ciclo {escuela.ciclo}
         <Icon name='chevron-down' size={14} color='var(--sa-muted)' className='shrink-0' />
       </span>
 

@@ -10,11 +10,12 @@ import { PreviewDialog } from '../organisms/PreviewDialog'
 import { MigajasReportes } from '../molecules/MigajasReportes'
 import { MensajeEstado } from '../../../Portal/shared/molecules/MensajeEstado'
 import { destinoSidebar } from '../../../Portal/shared/constants/navigation'
+import { escuela } from '../../../Portal/shared/constants/escuela'
 import type { FolioEmitido, GeneradorFormato, TipoDocumento } from '../types'
 import type { SidebarKey } from '../../../Portal/shared/types'
 
 export function ReportesPage() {
-  const [ciclo, setCiclo] = useState('2024-2025')
+  const [ciclo, setCiclo] = useState(escuela.ciclo)
   const [tipo, setTipo] = useState<'todos' | TipoDocumento>('todos')
   const [grupo, setGrupo] = useState('todos')
   const [busqueda, setBusqueda] = useState('')
@@ -24,7 +25,7 @@ export function ReportesPage() {
   const [preview, setPreview] = useState<GeneradorFormato | null>(null)
 
   const autorizado = true
-  const ultimoFolio = folios[0]?.folio ?? 'SEE-2024-F104'
+  const ultimoFolio = folios[0]?.folio ?? `SEE-${ciclo.slice(0, 4)}-F000`
   const q = busqueda.trim().toLowerCase()
 
   const generadoresVisibles = useMemo(
@@ -64,11 +65,11 @@ export function ReportesPage() {
 
   const registrarFolio = (tipoDocumento: TipoDocumento) => {
     const numero = siguiente
-    const folio = `SEE-2024-F${numero}`
+    const folio = `SEE-${ciclo.slice(0, 4)}-F${numero}`
     const nuevo: FolioEmitido = {
       folio,
       ciclo,
-      fecha: '22 Octubre 2024',
+      fecha: new Intl.DateTimeFormat('es-MX', { dateStyle: 'long' }).format(new Date()),
       estudiante:
         tipoDocumento === 'oficio'
           ? 'Oficio de Canalización Externa'

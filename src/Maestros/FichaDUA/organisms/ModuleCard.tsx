@@ -10,26 +10,26 @@ interface ModuleCardProps {
 export function ModuleCard({ duaModule }: ModuleCardProps) {
   return (
     <article className="flex h-full flex-col gap-4 rounded-[16px] border border-[var(--sa-border)] bg-[var(--sa-card)] p-4 shadow-[var(--shadow-sm)]">
-      <header className="flex items-center gap-3 rounded-[12px] bg-[var(--sa-header)] p-3">
+      <header className="flex items-center gap-3 border-b border-[var(--sa-border)] pb-3">
         <IconTile icon={duaModule.icon} tone={duaModule.tone} size="sm" />
         <div className="flex min-w-0 flex-col">
-          <span className="text-[13px] font-extrabold uppercase tracking-widest text-[var(--sa-muted)]">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--sa-muted)]">
             {duaModule.label}
           </span>
-          <h3 className="text-base font-extrabold leading-tight">{duaModule.title}</h3>
+          <h3 className="text-sm font-bold leading-tight">{duaModule.title}</h3>
         </div>
       </header>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-1 flex-col">
         {duaModule.pautas.map((pauta) => (
           <PautaItem key={pauta.title} pauta={pauta} />
         ))}
       </div>
 
-      <div className="mt-auto flex items-start gap-2 rounded-[12px] bg-[var(--sa-field)] px-3 py-2 text-base font-semibold text-[var(--sa-muted)]">
+      <div className="mt-auto flex items-start gap-2 border-t border-[var(--sa-border)] pt-2 text-xs font-medium text-[var(--sa-muted)]">
         <Icon
           name={duaModule.footer.icon}
-          size={14}
+          size={13}
           color="currentColor"
           className="mt-0.5 shrink-0"
         />

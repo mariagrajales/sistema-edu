@@ -40,7 +40,9 @@ export function AppTemplate({
         <TopBar onOpenSidebar={onOpenSidebar} theme={theme} onChangeTheme={onChangeTheme} />
 
         <main className={cn('flex w-full flex-1 flex-col gap-5', contentClassName)}>
-          {children}
+          <div className="sa-page-content flex w-full flex-1 flex-col gap-5">
+            {children}
+          </div>
         </main>
       </div>
     </div>

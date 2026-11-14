@@ -112,7 +112,7 @@ export const canalizacionContent = {
     ayudaRedaccion: 'Redacción objetiva y libre de juicios de valor.',
     motivoLabel: 'Motivo de la canalización:',
     motivoAyuda: 'Explique por qué se solicita la intervención de Psicología.',
-    prioridadTitulo: 'Nivel de Prioridad Sugerido para la Intervención: *',
+    prioridadTitulo: 'Nivel de Prioridad Sugerido para la Intervención:',
     maxCaracteres: 500,
   },
   acciones: {

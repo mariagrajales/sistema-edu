@@ -13,6 +13,7 @@ export type IconName =
   | 'chevron-right'
   | 'contrast'
   | 'sun'
+  | 'lightbulb'
   | 'moon'
   | 'help-circle'
   | 'check'

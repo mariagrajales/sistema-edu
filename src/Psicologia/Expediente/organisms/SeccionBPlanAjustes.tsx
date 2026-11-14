@@ -31,7 +31,7 @@ export function SeccionBPlanAjustes({ grupos }: SeccionBPlanAjustesProps) {
         </div>
         <div className='flex flex-wrap items-center gap-2'>
           <Chip tono='bosque' icon='stamp'>
-            Formato Oficial Ciclo 2024-2025
+            Formato Oficial Ciclo 2026-2027
           </Chip>
           <button
             type='button'

@@ -54,7 +54,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             ref={ref}
             id={fieldId}
             className={cn(
-              'w-full bg-transparent outline-none text-[var(--color-text-primary)] placeholder:text-[var(--color-text-placeholder)]',
+              'w-full bg-transparent outline-none text-[var(--color-text-primary)] placeholder:text-[var(--color-input-placeholder)]',
               leadingIcon ? 'pl-10' : 'pl-3',
               trailingSlot ? 'pr-12' : 'pr-3',
               'min-h-[var(--size-min-touch)] rounded-[var(--radius-md)]',
@@ -69,11 +69,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           ) : null}
         </div>
         {error || helperText ? (
-          <div id={`${fieldId}-helper`} className="flex items-start gap-2 text-sm">
+          <div id={`${fieldId}-helper`} className="flex items-start gap-2 text-xs">
             {helperIcon && !error ? (
               <Icon name={helperIcon} size={16} color="var(--color-text-primary)" />
             ) : null}
-            <span className={cn(error ? 'text-red-700' : 'text-[var(--color-text-primary)]')}>
+            <span className={cn(error ? 'text-red-700' : 'text-[var(--color-text-placeholder)]')}>
               {error || helperText}
             </span>
           </div>

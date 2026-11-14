@@ -5,13 +5,14 @@ import { cn } from '../cn'
 interface PillButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string
   icon?: IconName
+  iconOnly?: boolean
   variant?: 'light' | 'sky'
 }
 
-export function PillButton({ label, icon, variant = 'light', className, ...props }: PillButtonProps) {
+export function PillButton({ label, icon, iconOnly = false, variant = 'light', className, ...props }: PillButtonProps) {
   const variantClasses =
     variant === 'sky'
-      ? 'bg-[var(--color-sky)] text-[var(--color-text-primary)] hover:brightness-95'
+      ? 'border border-[var(--color-help-border)] bg-[var(--color-sky)] text-[var(--color-help-text)] hover:brightness-95'
       : 'bg-[var(--color-card)] text-[var(--color-text-primary)] hover:bg-[var(--color-surface-alt)]'
 
   return (
@@ -27,7 +28,7 @@ export function PillButton({ label, icon, variant = 'light', className, ...props
       {...props}
     >
       {icon ? <Icon name={icon} size={18} color="currentColor" /> : null}
-      <span className="text-sm font-bold">{label}</span>
+      <span className={cn('text-sm font-bold', iconOnly ? 'sr-only' : undefined)}>{label}</span>
     </button>
   )
 }

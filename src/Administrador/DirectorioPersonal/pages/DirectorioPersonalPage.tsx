@@ -24,11 +24,12 @@ export function DirectorioPersonalPage() {
       onNavigate={navegar}
       busqueda={busqueda}
       onBuscar={setBusqueda}
+      mostrarBusqueda={false}
     >
       <div className='mx-auto flex w-full max-w-[1900px] flex-col gap-12 px-6 py-12 text-[22px] leading-relaxed sm:px-10 lg:px-14'>
         <DirectorioHeader onAlta={irAlta} />
         <DirectorioKpiGrid />
-        <DirectorioTable colaboradores={filtrados} />
+        <DirectorioTable colaboradores={filtrados} busqueda={busqueda} onBuscar={setBusqueda} />
       </div>
     </AdministradorTemplate>
   )

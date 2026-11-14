@@ -114,7 +114,7 @@ export function FiltrosOperativos({
             <p className='text-[10.5px] font-bold tracking-widest text-[var(--sa-muted)] uppercase'>
               DUA vigentes
             </p>
-            <p className='text-[16px] leading-tight font-extrabold' style={{ color: '#7A4320' }}>
+            <p className='text-[16px] leading-tight font-extrabold' style={{ color: 'var(--sa-coffee)' }}>
               {totales.duaVigentes}
             </p>
           </div>

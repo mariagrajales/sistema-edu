@@ -1,4 +1,5 @@
 import type { Metric } from '../types'
+import { escuela } from '../../../Portal/shared/constants/escuela'
 
 export const homeContent = {
   pageHeader: {
@@ -13,7 +14,7 @@ export const homeContent = {
       icon: 'users',
       title: 'Alumnos en mi Grupo',
       value: '28 estudiantes',
-      description: 'Ciclo Escolar Activo 2024-2025',
+      description: `Ciclo Escolar Activo ${escuela.ciclo}`,
     },
     {
       id: 'dua',

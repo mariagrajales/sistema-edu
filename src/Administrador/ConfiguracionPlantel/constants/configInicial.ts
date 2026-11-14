@@ -1,4 +1,5 @@
 import type { IconName } from '../../../utils/types'
+import { escuela } from '../../../Portal/shared/constants/escuela'
 import type { PlantelConfig, SeccionConfigId } from '../types'
 
 export const CONFIG_STORAGE_KEY = 'nexusedu:plantel-config'
@@ -36,7 +37,7 @@ export function configInicial(): PlantelConfig {
         cedula: '1234567',
       },
     },
-    ciclo: { activo: '2024-2025' },
+    ciclo: { activo: escuela.ciclo },
     turnos: [
       {
         id: 'matutino',
@@ -86,4 +87,4 @@ export function configInicial(): PlantelConfig {
   }
 }
 
-export const ciclosDisponibles = ['2024-2025', '2025-2026'] as const
+export const ciclosDisponibles = [escuela.ciclo, '2025-2026', '2024-2025'] as const

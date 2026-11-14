@@ -7,7 +7,7 @@ export const indicadores: Indicador[] = [
     icon: 'clipboard',
     valor: '24',
     apoyo: 'alumnos este bimestre',
-    color: '#1F4A3F',
+    color: 'var(--sa-title)',
     barra: 100,
   },
   {
@@ -15,7 +15,7 @@ export const indicadores: Indicador[] = [
     label: 'DESEMPEÑO AFECTADO',
     icon: 'circle-x',
     valor: '18',
-    color: '#7A4320',
+    color: 'var(--sa-coffee)',
     barra: 75,
     chip: '75% del total',
   },
@@ -25,7 +25,7 @@ export const indicadores: Indicador[] = [
     icon: 'file-text',
     valor: '14',
     apoyo: 'Quím., Inform., Civ.',
-    color: '#2C5A7A',
+    color: 'var(--sa-steel)',
     barra: 58,
   },
   {
@@ -34,7 +34,7 @@ export const indicadores: Indicador[] = [
     icon: 'users',
     valor: '10',
     apoyo: 'Prioritarios',
-    color: '#1A1C1B',
+    color: 'var(--color-text-primary)',
     barra: 42,
   },
   {

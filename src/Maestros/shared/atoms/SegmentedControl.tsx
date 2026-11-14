@@ -29,13 +29,13 @@ export function SegmentedControl({ ariaLabel, options, onToggle }: SegmentedCont
           aria-pressed={option.active}
           onClick={() => onToggle(option.id)}
           className={cn(
-            'inline-flex min-h-[44px] items-center gap-2 rounded-full px-3 text-sm font-bold transition-colors',
+            'inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-sm font-bold transition-colors',
             option.active
               ? 'bg-[var(--sa-pill)] text-[var(--sa-accent)] shadow-[var(--shadow-sm)]'
               : 'text-[var(--sa-muted)] hover:text-[var(--color-text-primary)]'
           )}
         >
-          <Icon name={option.icon} size={15} color="currentColor" />
+          <Icon name={option.icon} size={16} color="currentColor" />
           {option.label}
         </button>
       ))}

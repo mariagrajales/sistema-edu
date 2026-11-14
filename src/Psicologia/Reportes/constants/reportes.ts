@@ -3,7 +3,7 @@ import type { FolioEmitido, GeneradorFormato } from '../types'
 export const generadores: GeneradorFormato[] = [
   {
     id: 'concentrado',
-    ciclo: '2024-2025',
+    ciclo: '2026-2027',
     etiqueta: 'Formato Estatal Chiapas · DPP-SEE',
     chip: 'Obligatorio Ene/Jul',
     icono: 'calculator',
@@ -15,7 +15,7 @@ export const generadores: GeneradorFormato[] = [
   },
   {
     id: 'oficio',
-    ciclo: '2024-2025',
+    ciclo: '2026-2027',
     etiqueta: 'Vinculación Hospitalaria y Social',
     chip: 'Interinstitucional',
     icono: 'mail',
@@ -27,7 +27,7 @@ export const generadores: GeneradorFormato[] = [
   },
   {
     id: 'carta',
-    ciclo: '2024-2025',
+    ciclo: '2026-2027',
     etiqueta: 'Marco Jurídico · Art. 76 LGDNNA',
     chip: 'Firma Autógrafa',
     icono: 'file-signature',
@@ -39,7 +39,7 @@ export const generadores: GeneradorFormato[] = [
   },
   {
     id: 'ficha',
-    ciclo: '2024-2025',
+    ciclo: '2026-2027',
     etiqueta: 'Uso Docente sin Datos Clínicos',
     chip: '8 Materias',
     icono: 'id-card',

@@ -1,5 +1,6 @@
 import type { IconName } from '../../../utils/types'
 import type { ChipTone } from '../types'
+import { escuela } from '../../../Portal/shared/constants/escuela'
 
 interface NavChip {
   id: string
@@ -14,7 +15,7 @@ export const fichaContent = {
     chips: [
       {
         id: 'vigente',
-        label: 'Ficha Oficial Vigente · Ciclo 2024-2025',
+        label: `Ficha Oficial Vigente · Ciclo ${escuela.ciclo}`,
         icon: 'check' as IconName,
         tone: 'menta',
       },

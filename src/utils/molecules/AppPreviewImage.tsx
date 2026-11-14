@@ -11,8 +11,9 @@ export function AppPreviewImage({ src, alt, className }: AppPreviewImageProps) {
     <img
       src={src}
       alt={alt}
-      loading="lazy"
-      className={cn('w-full h-auto object-cover rounded-[var(--radius-lg)]', className)}
+      loading="eager"
+      fetchPriority="high"
+      className={cn('block aspect-video w-full object-cover object-center rounded-[var(--radius-lg)]', className)}
     />
   )
 }

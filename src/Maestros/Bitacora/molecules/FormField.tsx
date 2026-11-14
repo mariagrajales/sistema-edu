@@ -19,14 +19,14 @@ export function FormField({ icon, label, help, htmlFor, large, children }: FormF
         htmlFor={htmlFor}
         className={cn(
           'flex items-center gap-2 font-bold text-[var(--color-text-primary)]',
-          large ? 'text-[15px]' : 'text-sm'
+          large ? 'text-sm' : 'text-sm'
         )}
       >
-        <Icon name={icon} size={large ? 20 : 16} color="var(--sa-accent)" />
+        <Icon name={icon} size={16} color="var(--sa-accent)" />
         {label}
       </label>
-      <div className={large ? 'mt-3' : 'mt-2'}>{children}</div>
-      <p className={cn(large ? 'mt-2 text-lg' : 'mt-1.5 text-base', 'text-[var(--sa-muted)]')}>
+      <div className={large ? 'mt-4' : 'mt-2'}>{children}</div>
+      <p className={cn(large ? 'mt-4 text-sm' : 'mt-1.5 text-base', 'text-[var(--sa-muted)]')}>
         {help}
       </p>
     </div>

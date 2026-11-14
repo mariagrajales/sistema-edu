@@ -19,27 +19,29 @@ interface CredencialesSeguridadFormProps {
 export function CredencialesSeguridadForm({ email, password, onEmail, onPassword }: CredencialesSeguridadFormProps) {
   const [mostrar, setMostrar] = useState(false)
   return (
-    <section className='rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-card)] shadow-sm'>
-      <header className='flex items-center gap-4 border-b border-[var(--sa-border)] px-8 py-6'>
-        <span className='flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-forest)] text-[18px] font-bold text-[var(--sa-on-accent)]'>2</span>
-        <h2 className='text-[28px] font-bold text-[var(--sa-text)]'>Credenciales y Seguridad de Acceso</h2>
+    <section className='min-w-0 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-card)] shadow-sm'>
+      <header className='flex min-w-0 items-center gap-3 border-b border-[var(--sa-border)] px-4 py-3'>
+        <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-forest)] text-sm font-bold text-[var(--sa-on-accent)]'>2</span>
+        <h2 className='min-w-0 text-lg leading-tight font-bold text-[var(--sa-text)]'>Credenciales y Seguridad de Acceso</h2>
       </header>
-      <div className='flex flex-col gap-5 px-8 py-6'>
+      <div className='flex min-w-0 flex-col gap-4 px-4 py-4'>
         <div className='flex flex-col gap-2'>
-          <label className='text-[20px] font-semibold'>Correo Institucional Generado *</label>
-          <input type='email' value={email} onChange={(e) => onEmail(e.target.value)} placeholder='usuario.apellido@colegionorte.edu.mx' className='h-16 rounded-xl border border-[var(--sa-border)] px-4 text-[22px]' />
+          <label className='text-sm font-semibold'>Correo Institucional Generado *</label>
+          <input type='email' value={email} onChange={(e) => onEmail(e.target.value)} placeholder='usuario.apellido@colegionorte.edu.mx' className='h-11 w-full min-w-0 rounded-lg border border-[var(--sa-border)] px-3 text-sm' />
         </div>
         <div className='flex flex-col gap-2'>
-          <label className='text-[20px] font-semibold'>Teléfono Móvil (Contacto/MFA) *</label>
-          <input placeholder='Ej. 55 1234 5678' className='h-16 rounded-xl border border-[var(--sa-border)] px-4 text-[22px]' />
+          <label className='text-sm font-semibold'>Teléfono Móvil (Contacto/MFA) *</label>
+          <input placeholder='Ej. 55 1234 5678' className='h-11 w-full min-w-0 rounded-lg border border-[var(--sa-border)] px-3 text-sm' />
         </div>
         <div className='flex flex-col gap-2'>
-          <label className='text-[20px] font-semibold'>Contraseña Temporal de Primer Acceso *</label>
-          <div className='flex items-center gap-3'>
-            <input type={mostrar ? 'text' : 'password'} value={password} onChange={(e) => onPassword(e.target.value)} className='h-16 flex-1 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-field)] px-4 text-[22px]' />
-            <button type='button' onClick={() => setMostrar((v) => !v)} className='inline-flex h-16 items-center justify-center rounded-xl border border-[var(--sa-border)] px-6 text-[19px] font-semibold'>{mostrar ? 'Ocultar' : 'Ver'}</button>
-            <button type='button' onClick={() => navigator.clipboard?.writeText(password)} className='inline-flex h-16 items-center justify-center rounded-xl border border-[var(--sa-border)] px-6 text-[19px] font-semibold'>Copiar</button>
-            <button type='button' onClick={() => onPassword(generarPassword())} className='inline-flex h-16 items-center justify-center rounded-xl border border-[var(--sa-border)] px-6 text-[19px] font-semibold'>Regenerar</button>
+          <label className='text-sm font-semibold'>Contraseña Temporal de Primer Acceso *</label>
+          <div className='flex min-w-0 flex-col gap-2'>
+            <input type={mostrar ? 'text' : 'password'} value={password} onChange={(e) => onPassword(e.target.value)} className='h-11 w-full min-w-0 rounded-lg border border-[var(--sa-border)] bg-[var(--sa-field)] px-3 text-sm' />
+            <div className='grid min-w-0 grid-cols-3 gap-2'>
+              <button type='button' onClick={() => setMostrar((v) => !v)} className='inline-flex min-h-9 min-w-0 items-center justify-center gap-1 rounded-lg border border-[var(--sa-border)] px-2 text-xs font-semibold'>{mostrar ? 'Ocultar' : 'Ver'}</button>
+              <button type='button' onClick={() => navigator.clipboard?.writeText(password)} className='inline-flex min-h-9 min-w-0 items-center justify-center gap-1 rounded-lg border border-[var(--sa-border)] px-2 text-xs font-semibold'>Copiar</button>
+              <button type='button' onClick={() => onPassword(generarPassword())} className='inline-flex min-h-9 min-w-0 items-center justify-center gap-1 rounded-lg border border-[var(--sa-border)] px-2 text-xs font-semibold'>Regenerar</button>
+            </div>
           </div>
         </div>
       </div>

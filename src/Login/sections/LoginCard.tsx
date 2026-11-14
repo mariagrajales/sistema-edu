@@ -6,10 +6,10 @@ import type { UseLoginFormResult } from '../hooks/useLoginForm'
 
 function InstitutionHeader() {
   return (
-    <div className="flex items-start gap-4">
-      <IconTile icon="person" background="green" size="lg" />
-      <div className="flex flex-col gap-1">
-        <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent)]">
+    <div className="flex items-start justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-separator)] bg-[var(--color-surface-alt)] p-3">
+      <IconTile icon="book-open" background="green" size="md" />
+      <div className="flex flex-col items-center gap-1 text-center">
+        <span className="text-xs font-bold text-[var(--color-accent)]">
           {loginContent.loginCard.platformLabel}
         </span>
         <h2 className="text-base font-bold leading-tight">
@@ -25,9 +25,9 @@ function InstitutionHeader() {
 
 function LoginHeading() {
   return (
-    <div className="flex flex-col gap-2">
-      <h1 className="text-[40px] font-bold leading-tight">{loginContent.loginCard.heading}</h1>
-      <p className="text-base text-[var(--color-steel)]">{loginContent.loginCard.subtitle}</p>
+    <div className="flex flex-col items-center gap-3 text-center">
+      <h1 className="text-[2rem] font-bold leading-tight text-[var(--color-login-heading)]">{loginContent.loginCard.heading}</h1>
+      <p className="text-base text-[var(--color-text-secondary)]">{loginContent.loginCard.subtitle}</p>
     </div>
   )
 }

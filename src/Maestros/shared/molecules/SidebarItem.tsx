@@ -17,7 +17,7 @@ export function SidebarItem({ label, icon, active, onClick }: SidebarItemProps) 
         aria-current={active ? 'page' : undefined}
         onClick={onClick}
         className={cn(
-          'flex min-h-[44px] w-full items-center gap-2.5 rounded-[12px] px-3 py-2 text-left text-sm font-semibold',
+          'flex min-h-11 w-full items-center gap-2.5 rounded-[12px] px-3 py-2 text-left text-sm font-semibold',
           active
             ? 'bg-[var(--color-forest)] text-[var(--sa-on-accent)]'
             : 'text-[var(--sa-muted)] hover:bg-[var(--sa-field)]'

@@ -6,7 +6,6 @@ export function useAlumnosDocente() {
   const [alumnos, setAlumnos] = useState<EstudianteApiDetalle[]>([])
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
   const cargar = useCallback(async (signal?: AbortSignal) => {
     setCargando(true)
     setError(null)
@@ -14,7 +13,10 @@ export function useAlumnosDocente() {
       const datos = await listarEstudiantesApi(signal)
       if (!signal?.aborted) setAlumnos(datos)
     } catch (err) {
-      if (!signal?.aborted) setError(mapAuthError(err))
+      if (!signal?.aborted) {
+        setAlumnos([])
+        setError(mapAuthError(err))
+      }
     } finally {
       if (!signal?.aborted) setCargando(false)
     }

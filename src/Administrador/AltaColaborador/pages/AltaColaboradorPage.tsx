@@ -83,40 +83,40 @@ export function AltaColaboradorPage() {
   }
 
   return (
-    <AdministradorTemplate vista='ALTA DE COLABORADOR' activeKey='directorio' onNavigate={navegar} busqueda='' onBuscar={() => {}}>
-      <div className='mx-auto flex w-full max-w-[1900px] flex-col gap-12 px-6 py-12 text-[22px] leading-relaxed sm:px-10 lg:px-14'>
-        <div className='flex flex-wrap items-center justify-between gap-6 rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-card)] px-10 py-8 shadow-sm'>
-          <div>
-            <h1 className='text-[56px] font-extrabold text-[var(--sa-text)] sm:text-[66px]'>Registro y Alta Integral de Colaborador Institucional</h1>
-            <p className='max-w-[1500px] text-[26px] text-[var(--sa-muted)]'>Cree el perfil institucional, genere credenciales seguras de acceso y configure la gobernanza de permisos clínicos y pedagógicos con estricta observancia a las leyes LGDNNA y FERPA</p>
+    <AdministradorTemplate vista='ALTA DE COLABORADOR' activeKey='directorio' onNavigate={navegar} busqueda='' onBuscar={() => {}} mostrarBusqueda={false}>
+      <div className='mx-auto flex min-w-0 w-full max-w-[1000px] flex-col gap-6 px-4 py-6 text-base leading-normal sm:px-6 lg:px-8'>
+        <div className='flex min-w-0 flex-wrap items-center justify-between gap-4 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-card)] px-4 py-4 shadow-sm sm:px-5'>
+          <div className='min-w-0'>
+            <h1 className='text-2xl leading-tight font-extrabold text-[var(--sa-title)] sm:text-3xl'>Registro y Alta Integral de Colaborador Institucional</h1>
+            <p className='mt-2 max-w-[100ch] text-sm leading-relaxed text-[var(--sa-muted)]'>Cree el perfil institucional, genere credenciales seguras de acceso y configure la gobernanza de permisos clínicos y pedagógicos con estricta observancia a las leyes LGDNNA y FERPA</p>
           </div>
-          <div className='flex flex-wrap items-center gap-5'>
-            <span className='rounded-full bg-[color-mix(in_srgb,var(--color-forest)_20%,transparent)] px-6 py-2 text-[18px] font-bold text-[var(--color-forest)]'>REGISTRO ACTIVO DE SISTEMA</span>
-            <button type='button' onClick={volver} className='inline-flex min-h-[64px] items-center gap-3 rounded-xl border border-[var(--sa-border)] px-7 text-[22px] font-semibold hover:bg-[var(--sa-field)]'>
-              <Icon name='arrow-left' size={26} />
+          <div className='flex flex-wrap items-center gap-2'>
+            <span className='rounded-full bg-[color-mix(in_srgb,var(--color-forest)_20%,transparent)] px-3 py-1 text-[10px] font-bold text-[var(--color-forest)]'>REGISTRO ACTIVO DE SISTEMA</span>
+            <button type='button' onClick={volver} className='inline-flex min-h-10 items-center gap-2 rounded-lg border border-[var(--sa-border)] px-4 text-sm font-semibold hover:bg-[var(--sa-field)]'>
+              <Icon name='arrow-left' size={17} />
               Volver al Directorio
             </button>
-            <button type='button' onClick={() => void crearCuenta()} disabled={enviando} className='inline-flex min-h-[64px] items-center gap-3 rounded-xl bg-[var(--color-forest)] px-9 text-[22px] font-bold text-[var(--sa-on-accent)] hover:brightness-95 disabled:opacity-60'>
-              <Icon name='save' size={26} />
+            <button type='button' onClick={() => void crearCuenta()} disabled={enviando} className='inline-flex min-h-8 items-center gap-1.5 rounded-lg bg-[var(--color-forest)] px-3 text-xs font-bold text-[var(--sa-on-accent)] hover:brightness-95 disabled:opacity-60'>
+              <Icon name='save' size={14} />
               {enviando ? 'Creando cuenta…' : 'Crear Cuenta y Enviar Accesos'}
             </button>
           </div>
         </div>
         {error ? (
-          <div role='alert' className='rounded-2xl border border-[#C62828] bg-[#FFF4F4] px-8 py-5 text-[22px] font-bold text-[#C62828]'>{error}</div>
+          <div role='alert' className='rounded-xl border border-[#C62828] bg-[#FFF4F4] px-4 py-3 text-sm font-bold text-[#C62828]'>{error}</div>
         ) : null}
         {exito ? (
-          <div role='status' className='rounded-2xl border border-[var(--color-forest)] bg-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] px-8 py-5 text-[22px] font-bold text-[var(--color-forest)]'>{exito}</div>
+          <div role='status' className='rounded-xl border border-[var(--color-forest)] bg-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] px-4 py-3 text-sm font-bold text-[var(--color-forest)]'>{exito}</div>
         ) : null}
-        <div className='grid gap-8 lg:grid-cols-2'>
+        <div className='grid min-w-0 grid-cols-1 gap-6 lg:grid-cols-2'>
           <DatosPersonalesForm valores={datos} onCambiar={(campo, valor) => setDatos((previo) => ({ ...previo, [campo]: valor }))} />
           <CredencialesSeguridadForm email={email} password={password} onEmail={setEmail} onPassword={setPassword} />
         </div>
         <RolAsignacion rolSeleccionado={rolSeleccionado} onSelect={setRolSeleccionado} />
         {rolSeleccionado === 'maestro' ? (
-          <div className='flex flex-col gap-2 rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-card)] px-8 py-6 shadow-sm'>
-            <label htmlFor='teacher-id' className='text-[20px] font-semibold'>Docente Vinculado *</label>
-            <select id='teacher-id' value={teacherId} onChange={(e) => setTeacherId(e.target.value)} disabled={cargandoDocentes || docentes.length === 0} className='h-16 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-card)] px-4 text-[22px] disabled:opacity-60'>
+          <div className='flex min-w-0 flex-col gap-2 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-card)] px-4 py-4 shadow-sm'>
+            <label htmlFor='teacher-id' className='text-sm font-semibold'>Docente Vinculado *</label>
+            <select id='teacher-id' value={teacherId} onChange={(e) => setTeacherId(e.target.value)} disabled={cargandoDocentes || docentes.length === 0} className='h-11 min-w-0 rounded-lg border border-[var(--sa-border)] bg-[var(--sa-card)] px-3 text-sm disabled:opacity-60'>
               <option value=''>{cargandoDocentes ? 'Cargando docentes…' : docentes.length === 0 ? 'No hay docentes disponibles' : 'Seleccione un docente'}</option>
               {docentes.map((docente) => (
                 <option key={docente.id} value={docente.id}>{`${docente.lastName} ${docente.firstName}`.trim()}</option>
@@ -126,15 +126,15 @@ export function AltaColaboradorPage() {
           </div>
         ) : null}
         <PlantelGradosForm />
-        <div className='flex flex-wrap items-center justify-between gap-5 rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-card)] px-8 py-6 shadow-sm'>
-          <div className='flex items-center gap-3 text-[22px] text-[var(--sa-muted)]'>
-            <Icon name='shield' size={24} />
+        <div className='flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-card)] px-4 py-4 shadow-sm'>
+          <div className='flex min-w-0 items-start gap-2 text-xs leading-relaxed text-[var(--sa-muted)]'>
+            <Icon name='shield' size={16} className='mt-0.5 shrink-0' />
             <span>Validación de privacidad y datos personales conforme a lineamientos institucionales. No se almacena información sensible en URL ni logs.</span>
           </div>
-          <div className='flex flex-wrap items-center gap-4'>
-            <button type='button' onClick={volver} className='inline-flex min-h-[64px] items-center gap-3 rounded-xl border border-[var(--sa-border)] px-7 text-[22px] font-semibold hover:bg-[var(--sa-field)]'>Cancelar y Descartar</button>
-            <button type='button' className='inline-flex min-h-[64px] items-center gap-3 rounded-xl border border-[var(--sa-border)] px-7 text-[22px] font-semibold hover:bg-[var(--sa-field)]'>Guardar como Borrador</button>
-            <button type='button' onClick={() => void crearCuenta()} disabled={enviando} className='inline-flex min-h-[64px] items-center gap-3 rounded-xl bg-[var(--color-forest)] px-9 text-[22px] font-bold text-[var(--sa-on-accent)] hover:brightness-95 disabled:opacity-60'>Crear Cuenta y Notificar al Colaborador</button>
+          <div className='grid w-full grid-cols-1 gap-2 sm:flex sm:w-auto sm:flex-wrap'>
+            <button type='button' onClick={volver} className='inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-[var(--sa-border)] px-3 text-xs font-semibold hover:bg-[var(--sa-field)]'>Cancelar y Descartar</button>
+            <button type='button' className='inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-[var(--sa-border)] px-3 text-xs font-semibold hover:bg-[var(--sa-field)]'>Guardar como Borrador</button>
+            <button type='button' onClick={() => void crearCuenta()} disabled={enviando} className='inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[var(--color-forest)] px-3 text-xs font-bold text-[var(--sa-on-accent)] hover:brightness-95 disabled:opacity-60'>Crear Cuenta y Notificar al Colaborador</button>
           </div>
         </div>
       </div>

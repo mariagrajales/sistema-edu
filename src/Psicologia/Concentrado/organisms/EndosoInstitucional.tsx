@@ -21,7 +21,7 @@ export function EndosoInstitucional() {
 
       <div className='mt-5 grid w-full min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3'>
         <article className='flex min-w-0 flex-col items-center gap-2 rounded-xl bg-[var(--sa-field)] px-4 py-5 text-center'>
-          <span className='flex h-11 w-11 items-center justify-center rounded-full bg-[#22C55E]/15 text-[#166534]'>
+          <span className='flex h-11 w-11 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--sa-success-fg)_15%,transparent)] text-[var(--sa-success-fg)]'>
             <Icon name='shield' size={20} color='currentColor' />
           </span>
           <p className='mt-1 text-[14px] font-extrabold'>Dra. Claudia Méndez</p>

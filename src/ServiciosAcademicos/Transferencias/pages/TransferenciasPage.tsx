@@ -223,7 +223,7 @@ export function TransferenciasPage() {
         <section className='rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-card)] p-4 shadow-sm sm:p-5'>
           <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
             <div className='flex items-center gap-3'>
-              <div className='flex h-12 w-12 items-center justify-center rounded-full bg-[color-mix(in_srgb,#60a5fa_18%,transparent)] text-sm font-bold text-[#1d4ed8]'>
+              <div className='flex h-12 w-12 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--sa-steel)_18%,transparent)] text-sm font-bold text-[var(--sa-steel)]'>
                 {iniciales}
               </div>
               <div className='min-w-0'>

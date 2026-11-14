@@ -12,10 +12,11 @@ import type { BitacoraAlumno, FiltroId, Observacion } from '../types'
 interface BitacoraPageProps {
   alumno: BitacoraAlumno
   observaciones: Observacion[]
+  demoMode: boolean
   onAdd: (observacion: Observacion) => void
 }
 
-export function BitacoraPage({ alumno, observaciones, onAdd }: BitacoraPageProps) {
+export function BitacoraPage({ alumno, observaciones, demoMode, onAdd }: BitacoraPageProps) {
   const [filtro, setFiltro] = useState<FiltroId>('todas')
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -25,22 +26,23 @@ export function BitacoraPage({ alumno, observaciones, onAdd }: BitacoraPageProps
   )
 
   return (
-    <>
+    <section className="mx-auto flex w-full max-w-[1080px] flex-col gap-4">
       <ProfileCard alumno={alumno} />
       <BitacoraHeader onAdd={() => setModalOpen(true)} />
       <FilterPills filters={filtros} active={filtro} count={visibles.length} onChange={setFiltro} />
       <Timeline observaciones={visibles} />
-      <SummaryCard />
-      <InfoBar />
+      <SummaryCard count={observaciones.length} demoMode={demoMode} />
+      <InfoBar demoMode={demoMode} />
 
       {modalOpen ? (
         <RegisterObservationModal
           alumno={alumno}
+          demoMode={demoMode}
           onClose={() => setModalOpen(false)}
           onSave={onAdd}
         />
       ) : null}
-    </>
+    </section>
   )
 }
 

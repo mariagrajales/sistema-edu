@@ -64,7 +64,7 @@ export function Sidebar({ open, activeId, onNavigate, onClose }: SidebarProps) {
         <button
           type="button"
           onClick={cerrarSesion}
-          className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-field)] px-3 text-sm font-bold hover:brightness-95"
+          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-field)] px-3 text-sm font-bold transition-colors hover:border-[var(--semaforo-rojo-fg)] hover:bg-[var(--semaforo-rojo-bg)] hover:text-[var(--semaforo-rojo-fg)]"
         >
           <Icon name="arrow-left" size={16} color="currentColor" />
           Cerrar sesión

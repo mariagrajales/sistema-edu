@@ -15,6 +15,7 @@ export interface PortalTemplateProps {
   onNavigate: (key: SidebarKey) => void
   busqueda?: string
   onBuscar?: (valor: string) => void
+  mostrarBusqueda?: boolean
   hojaImpresion?: ReactNode
   children: ReactNode
 }
@@ -28,6 +29,7 @@ export function PortalTemplate({
   onNavigate,
   busqueda,
   onBuscar,
+  mostrarBusqueda = true,
   hojaImpresion,
   children,
 }: PortalTemplateProps) {
@@ -39,6 +41,9 @@ export function PortalTemplate({
 
   const valorBusqueda = busqueda ?? busquedaInterna
   const registrarBusqueda = onBuscar ?? setBusquedaInterna
+  const contenidoCompacto =
+    roleKey === 'administrador' && (activeKey === 'roles' || activeKey === 'bitacora')
+  const contenidoSinZoom = roleKey === 'administrador' && vista === 'ALTA DE COLABORADOR'
 
   const navegar = (key: SidebarKey) => {
     setMenuAbierto(false)
@@ -70,10 +75,13 @@ export function PortalTemplate({
             onToggleTheme={() => setTheme(isDark ? 'light' : 'dark')}
             busqueda={valorBusqueda}
             onBuscar={registrarBusqueda}
+            mostrarBusqueda={mostrarBusqueda}
             onOpenMenu={() => setMenuAbierto((previo) => !previo)}
           />
 
-          {children}
+          <div className={`sa-page-content flex min-w-0 flex-col gap-5${contenidoCompacto ? ' sa-page-content--compact' : ''}${contenidoSinZoom ? ' sa-page-content--unscaled' : ''}`}>
+            {children}
+          </div>
         </main>
       </div>
 

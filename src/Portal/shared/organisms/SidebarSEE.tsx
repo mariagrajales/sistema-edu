@@ -70,17 +70,17 @@ export function SidebarSEE({
                 onClick={() => onNavigate?.(modulo.key)}
                 title={modulo.label}
                 className={cn(
-                  'flex min-h-[52px] w-full items-center gap-4 rounded-xl px-4 py-4 text-left text-[18px] leading-[1.35] font-semibold',
+                  'flex min-h-10 max-w-full items-center gap-2 rounded-lg px-2.5 py-1 text-left text-[13px] leading-tight font-semibold',
                   'overflow-wrap-normal hyphens-manual break-normal',
                   activo
-                    ? 'bg-[var(--color-forest)] text-[var(--sa-on-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-forest)]'
-                    : 'text-[var(--sa-text)] hover:bg-[var(--sa-field)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-forest)]'
+                    ? 'w-fit bg-[var(--color-forest)] text-[var(--sa-on-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-forest)]'
+                    : 'w-full text-[var(--sa-text)] hover:bg-[var(--sa-field)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-forest)]'
                 )}
                 style={{ overflowWrap: 'normal', wordBreak: 'normal', hyphens: 'manual' }}
               >
                 <Icon
                   name={modulo.icon}
-                  size={24}
+                  size={16}
                   color='currentColor'
                   className='shrink-0 flex-none'
                   aria-hidden='true'
@@ -109,7 +109,7 @@ export function SidebarSEE({
         <button
           type='button'
           onClick={cerrarSesion}
-          className='inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-field)] px-3 text-[14px] font-bold hover:brightness-95'
+          className='inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[var(--sa-border)] bg-[var(--sa-field)] px-3 text-[14px] font-bold hover:border-[var(--semaforo-rojo-fg)] hover:bg-[var(--semaforo-rojo-bg)] hover:text-[var(--semaforo-rojo-fg)]'
         >
           <Icon name='arrow-left' size={16} color='currentColor' />
           Cerrar sesión

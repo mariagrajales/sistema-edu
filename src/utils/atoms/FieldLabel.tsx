@@ -9,7 +9,7 @@ export function FieldLabel({ text, trailingTag, className }: FieldLabelProps) {
     <div className={['flex items-center justify-between', className].filter(Boolean).join(' ')}>
       <label className="text-sm font-bold text-[var(--color-text-primary)]">{text}</label>
       {trailingTag ? (
-        <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">{trailingTag}</span>
+        <span className="text-xs font-bold text-[var(--color-accent)]">{trailingTag}</span>
       ) : null}
     </div>
   )

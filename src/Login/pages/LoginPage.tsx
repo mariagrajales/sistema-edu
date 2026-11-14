@@ -11,8 +11,8 @@ export function LoginPage() {
   const { cycle, zone, plantelKey } = loginContent.topBar
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg)] p-4 md:p-6 lg:p-8">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
+    <main className="login-page min-h-screen bg-[var(--color-bg)] p-4 md:p-5 lg:p-4">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4">
         <TopInfoBar
           cycle={cycle}
           zone={zone}
@@ -20,7 +20,7 @@ export function LoginPage() {
           theme={theme}
           onToggleTheme={toggle}
         />
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
           <LoginCard form={form} />
           <SidePanel />
         </div>

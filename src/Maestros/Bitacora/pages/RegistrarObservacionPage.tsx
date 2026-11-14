@@ -3,16 +3,17 @@ import type { BitacoraAlumno, Observacion } from '../types'
 
 interface RegistrarObservacionPageProps {
   alumno: BitacoraAlumno
+  demoMode?: boolean
   onAdd: (observacion: Observacion) => void
 }
 
-export function RegistrarObservacionPage({ alumno, onAdd }: RegistrarObservacionPageProps) {
+export function RegistrarObservacionPage({ alumno, demoMode = false, onAdd }: RegistrarObservacionPageProps) {
   return (
     <section
       aria-label="Registrar nueva observación de aula"
-      className="overflow-hidden rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-card)] shadow-[var(--shadow-sm)]"
+      className="mx-auto w-full max-w-[920px] overflow-hidden rounded-xl border border-[var(--sa-border)] bg-[var(--sa-card)] shadow-[var(--shadow-sm)]"
     >
-      <ObservationForm alumno={alumno} variant="page" titleId="obs-page-title" onSave={onAdd} />
+      <ObservationForm alumno={alumno} variant="page" demoMode={demoMode} titleId="obs-page-title" onSave={onAdd} />
     </section>
   )
 }

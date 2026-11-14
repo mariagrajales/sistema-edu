@@ -31,12 +31,12 @@ export function LoginForm({ form }: LoginFormProps) {
       <EmailField
         label={email.label}
         name="email"
+        containerClassName="mb-4"
         autoComplete="username"
         placeholder={email.placeholder}
         value={values.email}
         onChange={(e) => setEmail(e.target.value)}
         helperText={email.helperText}
-        helperIcon="shield"
         error={errors.email}
       />
 
@@ -63,7 +63,6 @@ export function LoginForm({ form }: LoginFormProps) {
       <PrimaryButton
         label={loginContent.loginCard.submit}
         type="submit"
-        leadingIcon="key"
         trailingIcon="arrow-right"
         loading={isSubmitting}
       />
@@ -71,9 +70,9 @@ export function LoginForm({ form }: LoginFormProps) {
       {errors.form ? (
         <div
           role="alert"
-          className="flex items-start gap-2 rounded-[var(--radius-md)] bg-[var(--color-surface-alt)] p-3 text-sm"
+          className="flex items-start gap-2 rounded-[var(--radius-md)] border border-[var(--color-error)] bg-[var(--color-error-bg)] p-3 text-sm font-semibold text-[var(--color-error)]"
         >
-          <Icon name="info" size={18} color="var(--color-text-primary)" />
+          <Icon name="alert-triangle" size={18} color="currentColor" />
           <span>{errors.form}</span>
         </div>
       ) : null}

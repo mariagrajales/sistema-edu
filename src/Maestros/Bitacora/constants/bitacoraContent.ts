@@ -5,7 +5,7 @@ export const bitacoraContent = {
     title: 'Bitácora de Observaciones y Seguimiento Pedagógico',
     subtitle:
       'Registro compartido entre docentes de materias (Español, Química, Tecnología) y Gabinete de Psicología.',
-    add: { label: 'Agregar Nueva Observación de Aula', icon: 'plus-circle' },
+    add: { label: 'Agregar Nueva Observación', icon: 'plus-circle' },
   },
   filters: {
     label: 'Filtrar historial por asignatura:',

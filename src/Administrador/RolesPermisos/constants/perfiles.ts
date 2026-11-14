@@ -40,7 +40,7 @@ export const perfiles: Perfil[] = [
     nombre: 'Prefectura Escolar',
     icono: 'shield',
     nivel: 'Nivel 2 Operativo',
-    nivelColor: 'bg-[color-mix(in_srgb,#2C5A7A_18%,transparent)] text-[var(--sa-steel)]',
+    nivelColor: 'bg-[color-mix(in_srgb,var(--sa-steel)_18%,transparent)] text-[var(--sa-steel)]',
     usuarios: 8,
     descripcion: 'Monitoreo en patio y pasillos, validación por QR de pases de descanso sensorial, registro de incidencias.',
     pieChip: 'Lector QR Activo',

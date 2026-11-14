@@ -11,7 +11,7 @@ export function AuditoriaExpediente({ documentos, integridad }: AuditoriaExpedie
   return (
     <section className='flex h-full min-w-0 flex-col rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-card)] p-4 shadow-[var(--shadow-sm)] sm:p-5'>
       <p className='text-[10.5px] font-bold tracking-widest text-[var(--sa-muted)] uppercase'>
-        Marco normativo 2024-2025
+        Marco normativo 2026-2027
       </p>
       <h2
         className='mt-1 text-[20px] leading-tight font-extrabold'

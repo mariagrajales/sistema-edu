@@ -39,7 +39,7 @@ export function Paso2PautasAjustes() {
                 Plan de Pautas y Ajustes Razonables (DUA)
               </h2>
               <p className='mt-1 text-[12.5px] leading-snug text-[var(--sa-muted)]'>
-                Adecuaciones específicas de aula ciclo 2024-2025 • {planPautas.gradoGrupo}
+                Adecuaciones específicas de aula ciclo 2026-2027 • {planPautas.gradoGrupo}
               </p>
             </div>
           </div>

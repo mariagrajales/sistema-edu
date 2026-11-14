@@ -18,7 +18,7 @@ export function DistribucionCondiciones({ condiciones, total }: DistribucionCond
           Distribución por Condición de Aprendizaje
         </h2>
         <p className='text-[12.5px] text-[var(--sa-muted)]'>
-          {total} casos activos en seguimiento psicopedagógico durante el ciclo 2024-2025.
+          {total} casos activos en seguimiento psicopedagógico durante el ciclo 2026-2027.
         </p>
       </div>
 

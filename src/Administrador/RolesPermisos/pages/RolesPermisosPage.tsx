@@ -11,11 +11,13 @@ export function RolesPermisosPage() {
 
   return (
     <AdministradorTemplate vista='ROLES Y PERMISOS' activeKey='roles' onNavigate={navegar} busqueda='' onBuscar={() => {}}>
-      <div className='mx-auto flex w-full max-w-[1950px] flex-col gap-12 px-6 py-12 text-[22px] leading-relaxed sm:px-10 lg:px-14'>
+      <div className='mx-auto flex w-full max-w-[1500px] flex-col gap-6 px-4 py-6 text-base leading-normal sm:px-6 lg:px-8'>
         <ContextBarRoles />
         <RolesHeader onNuevo={irNuevo} />
-        <PerfilesGrid />
-        <MatrizPermisos />
+        <div className='flex flex-col gap-12'>
+          <PerfilesGrid />
+          <MatrizPermisos />
+        </div>
       </div>
     </AdministradorTemplate>
   )

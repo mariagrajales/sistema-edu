@@ -4,7 +4,7 @@ import { Icon } from './Icon'
 
 interface IconTileProps {
   icon: IconName
-  background: 'green' | 'sky' | 'white' | 'surface'
+  background: 'green' | 'sky' | 'white' | 'surface' | 'mint'
   size?: 'sm' | 'md' | 'lg'
   className?: string
   ariaLabel?: string
@@ -15,6 +15,7 @@ const bgMap = {
   sky: 'bg-[var(--color-sky)]',
   white: 'bg-[var(--color-card)]',
   surface: 'bg-[var(--color-surface)]',
+  mint: 'bg-[var(--color-icon-tint)]',
 } as const
 
 const sizeMap = {
@@ -34,6 +35,7 @@ const iconColorMap = {
   sky: 'var(--color-steel)',
   white: 'var(--color-text-primary)',
   surface: 'var(--color-text-primary)',
+  mint: 'var(--color-accent)',
 } as const
 
 export function IconTile({ icon, background, size = 'md', className, ariaLabel }: IconTileProps) {

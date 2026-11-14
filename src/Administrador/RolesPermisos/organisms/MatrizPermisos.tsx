@@ -109,29 +109,26 @@ const columnas = [
 
 export function MatrizPermisos() {
   return (
-    <section className='flex flex-col gap-6'>
-      <header className='flex flex-wrap items-center justify-between gap-4'>
-        <div className='flex items-center gap-3'>
-          <Icon name='sliders' size={26} />
-          <div>
-            <h2 className='text-[34px] font-extrabold text-[var(--sa-text)]'>Matriz Interactiva de Permisos por Módulo</h2>
-            <p className='text-[20px] text-[var(--sa-muted)]'>Haga clic en los conmutadores para modificar en tiempo real los accesos. Los cambios quedan registrados en la bitácora criptográfica.</p>
-          </div>
+    <section className='flex flex-col gap-4'>
+      <header className='flex flex-wrap items-center justify-between gap-3'>
+        <div className='min-w-0'>
+          <h2 className='text-xl font-extrabold text-[var(--sa-title)]'>Matriz Interactiva de Permisos por Módulo</h2>
+          <p className='mt-1 max-w-[100ch] text-sm leading-relaxed text-[var(--sa-muted)]'>Haga clic en los conmutadores para modificar en tiempo real los accesos. Los cambios quedan registrados en la bitácora criptográfica.</p>
         </div>
-        <div className='flex flex-wrap items-center gap-2'>
-          <span className='text-[19px] font-semibold text-[var(--sa-muted)]'>Filtrar por:</span>
-          <button type='button' className='rounded-full bg-[var(--color-forest)] px-4 py-1.5 text-[18px] font-bold text-[var(--sa-on-accent)]'>Todos (8 Módulos)</button>
-          <button type='button' className='rounded-full border border-[var(--sa-border)] px-4 py-1.5 text-[18px] font-semibold'>Clínico & SEE</button>
-          <button type='button' className='rounded-full border border-[var(--sa-border)] px-4 py-1.5 text-[18px] font-semibold'>Operativo & Aula</button>
-          <button type='button' className='rounded-full border border-[var(--sa-border)] px-4 py-1.5 text-[18px] font-semibold'>Administrativo</button>
+        <div className='flex flex-wrap items-center gap-1.5'>
+          <span className='text-xs font-semibold text-[var(--sa-muted)]'>Filtrar por:</span>
+          <button type='button' className='rounded-full bg-[var(--color-forest)] px-3 py-1 text-xs font-bold text-[var(--sa-on-accent)]'>Todos (8 Módulos)</button>
+          <button type='button' className='rounded-full border border-[var(--sa-border)] px-3 py-1 text-xs font-semibold'>Clínico & SEE</button>
+          <button type='button' className='rounded-full border border-[var(--sa-border)] px-3 py-1 text-xs font-semibold'>Operativo & Aula</button>
+          <button type='button' className='rounded-full border border-[var(--sa-border)] px-3 py-1 text-xs font-semibold'>Administrativo</button>
         </div>
       </header>
       <div className='overflow-x-auto rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-card)] shadow-sm'>
-        <table className='min-w-[1400px] w-full text-[19px]'>
+        <table className='min-w-[1180px] w-full text-[15px]'>
           <thead>
             <tr className='border-b border-[var(--sa-border)] bg-[var(--sa-field)]'>
               {columnas.map((c, idx) => (
-                <th key={c.key} className={cn('px-6 py-4 text-left text-[13px] font-bold uppercase tracking-wide text-[var(--sa-muted)]', idx === 0 ? 'sticky left-0 z-10 min-w-[320px] bg-[var(--sa-field)]' : 'min-w-[220px]')}>
+                <th key={c.key} className={cn('whitespace-nowrap px-5 py-3 text-left text-xs font-bold uppercase tracking-wide text-[var(--sa-muted)]', idx === 0 ? 'sticky left-0 z-10 min-w-[280px] bg-[var(--sa-field)]' : 'min-w-[180px]')}>
                   {c.label}
                 </th>
               ))}
@@ -140,18 +137,18 @@ export function MatrizPermisos() {
           <tbody>
             {modulos.map((m) => (
               <tr key={m.id} className='group border-b border-[var(--sa-border)] transition-colors duration-200 hover:bg-[color-mix(in_srgb,var(--color-forest)_5%,transparent)]'>
-                <td className='sticky left-0 z-10 bg-[var(--sa-card)] px-6 py-5 transition-colors duration-200 group-hover:bg-[color-mix(in_srgb,var(--color-forest)_5%,var(--sa-card))]'>
-                  <div className='flex items-start gap-4'>
-                    <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--sa-field)] text-[var(--color-forest)] transition-all duration-200 group-hover:scale-105 group-hover:bg-[color-mix(in_srgb,var(--color-forest)_16%,transparent)]'>
-                      <Icon name={m.icono} size={22} />
+                <td className='sticky left-0 z-10 bg-[var(--sa-card)] px-5 py-4 transition-colors duration-200 group-hover:bg-[color-mix(in_srgb,var(--color-forest)_5%,var(--sa-card))]'>
+                  <div className='flex items-start gap-3'>
+                    <div className='flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full bg-[var(--sa-field)] text-[var(--color-forest)] transition-all duration-200 group-hover:scale-105 group-hover:bg-[color-mix(in_srgb,var(--color-forest)_16%,transparent)]'>
+                      <Icon name={m.icono} size={18} />
                     </div>
                     <div className='flex flex-col gap-1'>
-                      <p className='cursor-default font-bold leading-snug underline decoration-transparent decoration-2 underline-offset-4 transition-colors duration-200 group-hover:text-[var(--color-forest)] group-hover:decoration-[var(--color-forest)]' title={m.descripcion}>
+                      <p className='cursor-default text-[15px] font-bold leading-snug underline decoration-transparent decoration-2 underline-offset-4 transition-colors duration-200 group-hover:text-[var(--color-forest)] group-hover:decoration-[var(--color-forest)]' title={m.descripcion}>
                         {m.nombre}
                       </p>
-                      {m.chip ? <span className='w-fit rounded-full bg-[color-mix(in_srgb,#D64545_16%,transparent)] px-2 py-0.5 text-[16px] font-bold text-[#D64545]'>🔒 {m.chip}</span> : null}
-                      <p className='flex items-start gap-1.5 text-[17px] leading-snug text-[var(--sa-muted)]'>
-                        <Icon name='info' size={16} className='mt-0.5 shrink-0' />
+                      {m.chip ? <span className='w-fit rounded-full bg-[color-mix(in_srgb,#D64545_16%,transparent)] px-2 py-0.5 text-[11px] font-bold text-[#D64545]'>🔒 {m.chip}</span> : null}
+                      <p className='flex items-start gap-1.5 text-xs leading-snug text-[var(--sa-muted)]'>
+                        <Icon name='info' size={14} className='mt-0.5 shrink-0' />
                         <span className='transition-colors duration-200 group-hover:text-[var(--sa-text)]'>{m.descripcion}</span>
                       </p>
                     </div>
@@ -159,9 +156,9 @@ export function MatrizPermisos() {
                 </td>
                 {(['docente', 'prefecto', 'servicios', 'psicologia', 'administrador'] as const).map((rol) => {
                   const e = etiquetas[m.id]?.[rol]
-                  if (!e) return <td key={rol} className='px-6 py-5' />
+                  if (!e) return <td key={rol} className='px-5 py-4' />
                   return (
-                    <td key={rol} className='px-6 py-5'>
+                    <td key={rol} className='px-5 py-4'>
                       <button
                         type='button'
                         title={`${e.txt} — ${nombresTipo[e.tipo] ?? e.tipo}`}
@@ -173,8 +170,8 @@ export function MatrizPermisos() {
                           coloresTipo[e.tipo]
                         )}
                       >
-                        <Icon name={iconosTipo[e.tipo]} size={18} className='shrink-0 transition-transform duration-200 group-hover/boton:scale-110' />
-                        <span className='text-[18px] font-semibold transition-colors duration-200 group-hover/boton:text-[var(--color-forest)]'>{e.txt}</span>
+                        <Icon name={iconosTipo[e.tipo]} size={17} className='shrink-0 transition-transform duration-200 group-hover/boton:scale-110' />
+                        <span className='text-sm font-semibold transition-colors duration-200 group-hover/boton:text-[var(--color-forest)]'>{e.txt}</span>
                       </button>
                     </td>
                   )
@@ -184,11 +181,11 @@ export function MatrizPermisos() {
           </tbody>
         </table>
       </div>
-      <div className='flex flex-wrap items-center justify-between gap-4 text-[19px] text-[var(--sa-muted)]'>
+      <div className='flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--sa-muted)]'>
         <p>Los permisos se actualizarán en cascada de forma inmediata para las sesiones activas vía WebSocket institucional.</p>
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-3'>
           <span>Versión de esquema: v4.2-2024b</span>
-          <button type='button' className='rounded-xl border border-[var(--sa-border)] px-5 py-2 font-semibold'>Guardar Copia Local</button>
+          <button type='button' className='rounded-lg border border-[var(--sa-border)] px-3 py-1.5 font-semibold'>Guardar Copia Local</button>
         </div>
       </div>
     </section>

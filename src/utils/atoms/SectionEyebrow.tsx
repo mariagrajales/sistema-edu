@@ -9,7 +9,7 @@ export function SectionEyebrow({ text, className }: SectionEyebrowProps) {
   return (
     <span
       className={cn(
-        'text-xs font-bold uppercase tracking-widest text-[var(--color-accent)]',
+        'text-xs font-bold text-[var(--color-accent)]',
         className
       )}
     >

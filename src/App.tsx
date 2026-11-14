@@ -1,5 +1,5 @@
 import './styles/sa-theme.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { CanalizacionesPage } from './Psicologia/Canalizaciones/pages/CanalizacionesPage'
 import { ConcentradoPage } from './Psicologia/Concentrado/pages/ConcentradoPage'
 import { DashboardPage } from './Psicologia/Dashboard/pages/DashboardPage'
@@ -66,60 +66,67 @@ function App() {
     }
   }, [redirigir, destino])
 
-  if (!session) return <LoginPage />
+  if (!session) {
+    return (
+      <>
+        <LoginPage />
+      </>
+    )
+  }
   if (redirigir) return null
 
+  let page: ReactNode
+
   if (ruta.startsWith('maestros')) {
-    return <PortalMaestrosPage ruta={ruta} />
-  }
-
-  if (ruta === 'administrador' || ruta === 'administrador/directorio') {
-    return <DirectorioPersonalPage />
-  }
-  if (ruta === 'administrador/alta' || ruta === 'administrador/nuevo' || ruta === 'administrador/registro') {
-    return <AltaColaboradorPage />
-  }
-  if (ruta === 'administrador/roles') {
-    return <RolesPermisosPage />
-  }
-  if (ruta === 'administrador/bitacora') {
-    return <BitacoraAuditoriaPage />
-  }
-  if (ruta === 'administrador/configuracion') {
-    return <ConfiguracionPlantelPage />
-  }
-
-  if (ruta === 'servicios-academicos' || ruta === 'servicios-academicos/padron') {
-    return <PadronGeneralPage />
-  }
-  if (
+    page = <PortalMaestrosPage ruta={ruta} />
+  } else if (ruta === 'administrador' || ruta === 'administrador/directorio') {
+    page = <DirectorioPersonalPage />
+  } else if (ruta === 'administrador/alta' || ruta === 'administrador/nuevo' || ruta === 'administrador/registro') {
+    page = <AltaColaboradorPage />
+  } else if (ruta === 'administrador/roles') {
+    page = <RolesPermisosPage />
+  } else if (ruta === 'administrador/bitacora') {
+    page = <BitacoraAuditoriaPage />
+  } else if (ruta === 'administrador/configuracion') {
+    page = <ConfiguracionPlantelPage />
+  } else if (ruta === 'servicios-academicos' || ruta === 'servicios-academicos/padron') {
+    page = <PadronGeneralPage />
+  } else if (
     ruta === 'servicios-academicos/alta' ||
     ruta.startsWith('servicios-academicos/alta/')
   ) {
-    return <AltaEstudiantePage />
-  }
-  if (
+    page = <AltaEstudiantePage />
+  } else if (
     ruta === 'servicios-academicos/cotejo' ||
     ruta.startsWith('servicios-academicos/cotejo/')
   ) {
-    return <CotejoDocumentacionPage />
-  }
-  if (
+    page = <CotejoDocumentacionPage />
+  } else if (
     ruta === 'servicios-academicos/transferencias' ||
     ruta.startsWith('servicios-academicos/transferencias/')
   ) {
-    return <TransferenciasPage />
+    page = <TransferenciasPage />
+  } else if (ruta === 'servicios-academicos/estadisticas') {
+    page = <EstadisticasPage />
+  } else if (ruta === 'servicios-academicos/expediente') {
+    page = <ExpedienteAdministrativoPage />
+  } else if (ruta === 'servicios-academicos/ficha') {
+    page = <FichaEscolarPage />
+  } else if (ruta.startsWith('servicios-academicos')) {
+    page = <PadronGeneralPage />
+  } else if (ruta === 'reportes') {
+    page = <ReportesPage />
+  } else if (ruta === 'expediente') {
+    page = <ExpedientePage />
+  } else if (ruta === 'canalizaciones') {
+    page = <CanalizacionesPage />
+  } else if (ruta === 'concentrado') {
+    page = <ConcentradoPage />
+  } else {
+    page = <DashboardPage />
   }
-  if (ruta === 'servicios-academicos/estadisticas') return <EstadisticasPage />
-  if (ruta === 'servicios-academicos/expediente') return <ExpedienteAdministrativoPage />
-  if (ruta === 'servicios-academicos/ficha') return <FichaEscolarPage />
-  if (ruta.startsWith('servicios-academicos')) return <PadronGeneralPage />
 
-  if (ruta === 'reportes') return <ReportesPage />
-  if (ruta === 'expediente') return <ExpedientePage />
-  if (ruta === 'canalizaciones') return <CanalizacionesPage />
-  if (ruta === 'concentrado') return <ConcentradoPage />
-  return <DashboardPage />
+  return page
 }
 
 export default App

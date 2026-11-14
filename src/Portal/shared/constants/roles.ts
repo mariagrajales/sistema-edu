@@ -1,4 +1,5 @@
 import type { RoleConfig, RoleKey } from '../types'
+import { escuela } from './escuela'
 
 export const roles: Record<RoleKey, RoleConfig> = {
   administrador: {
@@ -46,7 +47,7 @@ export const roles: Record<RoleKey, RoleConfig> = {
     footer: {
       type: 'norma',
       norma: 'Sesión Segura SSL',
-      ciclo: '2024-2025',
+      ciclo: escuela.ciclo,
     },
   },
   psicologia: {
@@ -87,7 +88,7 @@ export const roles: Record<RoleKey, RoleConfig> = {
       },
       { key: 'reportes', label: 'Reportes Oficiales', icon: 'file-text', hash: '#reportes' },
     ],
-    footer: { type: 'norma', norma: 'Norma SEP / SEE', ciclo: '2024-2025' },
+    footer: { type: 'norma', norma: 'Norma SEP / SEE', ciclo: escuela.ciclo },
   },
   servicios_academicos: {
     key: 'servicios_academicos',

@@ -10,14 +10,15 @@ interface TarjetaCalendarioProps {
   onCambio: (config: PlantelConfig) => void
 }
 
-const hitos = [
-  { fecha: '26 Ago 2024', titulo: 'Inicio del ciclo escolar', icono: 'flag' as const },
-  { fecha: '18 Nov 2024', titulo: 'Primer periodo de evaluación', icono: 'clipboard-check' as const },
-  { fecha: '14 Abr 2025', titulo: 'Segundo periodo de evaluación', icono: 'list-checks' as const },
-  { fecha: '11 Jul 2025', titulo: 'Fin del ciclo escolar', icono: 'flag' as const },
-]
-
 export function TarjetaCalendario({ config, errores, onCambio }: TarjetaCalendarioProps) {
+  const [anioInicio, anioFin] = config.ciclo.activo.split('-')
+  const hitos = [
+    { fecha: `26 Ago ${anioInicio}`, titulo: 'Inicio del ciclo escolar', icono: 'flag' as const },
+    { fecha: `18 Nov ${anioInicio}`, titulo: 'Primer periodo de evaluación', icono: 'clipboard-check' as const },
+    { fecha: `14 Abr ${anioFin}`, titulo: 'Segundo periodo de evaluación', icono: 'list-checks' as const },
+    { fecha: `11 Jul ${anioFin}`, titulo: 'Fin del ciclo escolar', icono: 'flag' as const },
+  ]
+
   return (
     <TarjetaConfig
       titulo='Ciclo Escolar Vigente'

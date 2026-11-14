@@ -11,6 +11,7 @@ import type { BitacoraAlumno, Observacion } from '../types'
 interface ObservationFormProps {
   alumno: BitacoraAlumno
   variant: 'modal' | 'page'
+  demoMode?: boolean
   titleId?: string
   onSave: (observacion: Observacion) => void
   onClose?: () => void
@@ -19,6 +20,7 @@ interface ObservationFormProps {
 export function ObservationForm({
   alumno,
   variant,
+  demoMode = false,
   titleId,
   onSave,
   onClose,
@@ -35,10 +37,13 @@ export function ObservationForm({
   const [saved, setSaved] = useState(false)
 
   const { header, asignatura, fecha, tipo, descripcion: desc, footer } = observacionModal
+  const fechaTexto = demoMode
+    ? `Vista previa · ${new Intl.DateTimeFormat('es-MX', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())}`
+    : fecha.value
 
   const controlClasses = cn(
     'w-full rounded-xl border border-[var(--sa-border)] bg-[var(--sa-field)] font-semibold text-[var(--color-text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--sa-accent)] focus-visible:outline-none',
-    cx('h-[52px] px-4 text-base', 'h-16 px-5 text-lg')
+    cx('h-[52px] px-4 text-base', 'h-12 px-4 text-base')
   )
 
   const handleSave = () => {
@@ -54,19 +59,21 @@ export function ObservationForm({
       id: `obs-${Date.now()}`,
       tone: tipoSel.tone,
       icon: tipoSel.icon,
-      fecha: '04 de Febrero, 2025',
-      hora: '16:30 hrs',
-      lugar: 'Módulo 3 · Matutino',
+      fecha: new Intl.DateTimeFormat('es-MX', { dateStyle: 'long' }).format(new Date()),
+      hora: new Intl.DateTimeFormat('es-MX', { hour: '2-digit', minute: '2-digit' }).format(new Date()),
+      lugar: alumno.grupo,
       materia: asignaturaSel.materia,
-      docente: asignaturaSel.docente,
+      docente: demoMode ? 'Docente de ejemplo' : asignaturaSel.docente,
       materiaIcon: asignaturaSel.materiaIcon,
       categoria: tipoSel.categoria,
       nota: [{ text: descripcion.trim() }],
-      chipsLabel: 'Estrategias DUA:',
-      chips: [desc.pautaLabel],
-      link: notificar
-        ? { label: 'Notificado a Psicología y anexado al expediente', icon: 'check', tone: 'steel' }
-        : { label: 'Sin notificación al Gabinete', icon: 'info' },
+      chipsLabel: demoMode ? 'Datos de ejemplo:' : 'Estrategias DUA:',
+      chips: demoMode ? ['Registro local de prueba'] : [desc.pautaLabel],
+      link: demoMode
+        ? { label: 'Vista previa · no sincronizado', icon: 'info' }
+        : notificar
+          ? { label: 'Notificado a Psicología y anexado al expediente', icon: 'check', tone: 'steel' }
+          : { label: 'Sin notificación al Gabinete', icon: 'info' },
       filtro: asignaturaSel.filtro,
     }
 
@@ -100,7 +107,7 @@ export function ObservationForm({
       <header
         className={cn(
           'flex shrink-0 items-start justify-between bg-[var(--sa-modal-header)]',
-          cx('gap-4 px-8 py-6', 'gap-6 px-10 py-8')
+          cx('gap-4 px-8 py-6', 'gap-4 px-6 py-5')
         )}
       >
         <div>
@@ -108,7 +115,7 @@ export function ObservationForm({
             <span
               className={cn(
                 'inline-flex items-center rounded-full bg-[var(--sa-avatar)] font-extrabold text-white',
-                cx('gap-2 px-3 py-1.5 text-sm', 'gap-2.5 px-4 py-2 text-base')
+                cx('gap-2 px-3 py-1.5 text-sm', 'gap-2 px-3 py-1.5 text-sm')
               )}
             >
               <Icon name={header.pill.icon} size={large ? 20 : 15} color="currentColor" />
@@ -117,7 +124,7 @@ export function ObservationForm({
             <span
               className={cn(
                 'rounded-full bg-[var(--sa-chip-gray)] font-bold text-[var(--sa-chip-gray-text)]',
-                cx('px-3 py-1.5 text-[13px]', 'px-4 py-2 text-base')
+                cx('px-3 py-1.5 text-[13px]', 'px-3 py-1.5 text-sm')
               )}
             >
               {header.badge}
@@ -127,7 +134,7 @@ export function ObservationForm({
             id={titleId}
             className={cn(
               'leading-tight font-bold text-[var(--color-text-primary)]',
-              cx('mt-3 text-[32px]', 'mt-4 text-[48px]')
+              cx('mt-3 text-[32px]', 'mt-3 text-[28px]')
             )}
           >
             {header.title}
@@ -149,7 +156,7 @@ export function ObservationForm({
         className={cn(
           'bg-[var(--sa-card)]',
           large
-            ? 'flex flex-col gap-8 px-10 py-8'
+            ? 'flex flex-col gap-y-10 px-5 py-4'
             : 'flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto px-8 py-6'
         )}
       >
@@ -163,9 +170,9 @@ export function ObservationForm({
           </p>
         ) : null}
 
-        <ContextSummary alumno={alumno} large={large} />
+        <ContextSummary alumno={alumno} large={large} demoMode={demoMode} />
 
-        <div className={cn('grid grid-cols-1 md:grid-cols-2', cx('gap-4', 'gap-6'))}>
+        <div className={cn('grid grid-cols-1 lg:grid-cols-2 gap-x-6', cx('gap-y-4', 'gap-y-8'))}>
           <FormField
             icon={asignatura.icon}
             label={asignatura.label}
@@ -204,7 +211,7 @@ export function ObservationForm({
                 id="obs-fecha"
                 type="text"
                 readOnly
-                value={fecha.value}
+                value={fechaTexto}
                 className={cn(controlClasses, 'pr-11')}
               />
               <span className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[var(--sa-muted)]">
@@ -216,14 +223,14 @@ export function ObservationForm({
 
         <fieldset>
           <legend
-            className={cn('font-bold text-[var(--color-text-primary)]', large ? 'text-[15px]' : 'text-sm')}
+            className="font-bold text-sm text-[var(--color-text-primary)]"
           >
             <span className="inline-flex items-center gap-2">
-              <Icon name={tipo.icon} size={large ? 20 : 16} color="var(--sa-accent)" />
+              <Icon name={tipo.icon} size={16} color="var(--sa-accent)" />
               {tipo.label}
             </span>
           </legend>
-          <div className={cn('grid grid-cols-1 sm:grid-cols-2', cx('mt-2 gap-3', 'mt-3 gap-4'))}>
+          <div className={cn('grid grid-cols-1 sm:grid-cols-2 gap-x-4', cx('mt-2 gap-y-3', 'mt-4 gap-y-6'))}>
             {observacionModal.tipos.map((option) => (
               <ObservationTypeOption
                 key={option.id}
@@ -243,22 +250,22 @@ export function ObservationForm({
               htmlFor="obs-descripcion"
               className={cn(
                 'inline-flex items-center gap-2 font-bold text-[var(--color-text-primary)]',
-                large ? 'text-[15px]' : 'text-sm'
+                'text-sm'
               )}
             >
-              <Icon name={desc.icon} size={large ? 20 : 16} color="var(--sa-accent)" />
+              <Icon name={desc.icon} size={16} color="var(--sa-accent)" />
               {desc.label}
             </label>
             <span
               className={cn(
                 'rounded-full bg-[var(--sa-pauta-bg)] font-bold text-[var(--sa-accent)]',
-                cx('px-3 py-1.5 text-[13px]', 'px-4 py-2 text-base')
+                cx('px-3 py-1.5 text-[13px]', 'px-3 py-1.5 text-xs')
               )}
             >
               {desc.pautaLabel}
             </span>
           </div>
-          <p className={cn(large ? 'mt-3 text-lg' : 'mt-2 text-base', 'text-[var(--sa-muted)]')}>
+          <p className={cn(large ? 'mt-4 text-sm' : 'mt-2 text-base', 'text-[var(--sa-muted)]')}>
             {desc.help}
           </p>
           <textarea
@@ -271,40 +278,40 @@ export function ObservationForm({
             aria-invalid={error}
             className={cn(
               'w-full rounded-xl border bg-[var(--sa-card)] leading-[1.6] text-[var(--color-text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--sa-accent)] focus-visible:outline-none',
-              cx('mt-2 min-h-[120px] px-4 py-3 text-base', 'mt-3 min-h-[200px] px-5 py-4 text-lg'),
+              cx('mt-2 min-h-[120px] px-4 py-3 text-base', 'mt-4 min-h-[128px] px-4 py-3 text-base'),
               error ? 'border-[#B42318]' : 'border-[var(--sa-input-border)]'
             )}
           />
-          <div className="mt-2 flex items-center justify-between gap-2">
+          <div className={cn('flex items-center justify-between gap-2', large ? 'mt-4' : 'mt-2')}>
             <span
               className={cn(
                 'inline-flex items-center gap-1.5 text-[var(--sa-muted)]',
-                large ? 'text-lg' : 'text-base'
+                large ? 'text-sm' : 'text-base'
               )}
             >
-              <Icon name={desc.calidadIcon} size={large ? 18 : 14} color="var(--sa-accent)" />
+              <Icon name={desc.calidadIcon} size={14} color="var(--sa-accent)" />
               {desc.calidad}
             </span>
             <span
-              className={cn('font-bold text-[var(--color-text-primary)]', large ? 'text-lg' : 'text-base')}
+              className={cn('font-bold text-[var(--color-text-primary)]', large ? 'text-sm' : 'text-base')}
             >
               {descripcion.length} caracteres
             </span>
           </div>
           {error ? (
-            <p role="alert" className={cn('mt-1 font-bold text-[#B42318]', large ? 'text-lg' : 'text-base')}>
+            <p role="alert" className={cn('mt-1 font-bold text-[#B42318]', large ? 'text-sm' : 'text-base')}>
               {footer.error}
             </p>
           ) : null}
         </div>
 
-        <NotificationToggle checked={notificar} large={large} onChange={setNotificar} />
+        <NotificationToggle checked={notificar} large={large} demoMode={demoMode} onChange={setNotificar} />
       </div>
 
       <footer
         className={cn(
           'flex shrink-0 flex-col-reverse bg-[var(--sa-modal-footer)] sm:flex-row sm:justify-end',
-          cx('gap-4 px-8 py-4', 'gap-5 px-10 py-6')
+          cx('gap-4 px-8 py-4', 'gap-3 px-5 py-3')
         )}
       >
         <button
@@ -313,10 +320,10 @@ export function ObservationForm({
           disabled={saving}
           className={cn(
             'inline-flex w-full items-center justify-center rounded-xl bg-[var(--sa-chip-gray)] font-bold text-[var(--color-text-primary)] hover:brightness-95 focus-visible:ring-2 focus-visible:ring-[var(--sa-accent)] focus-visible:outline-none disabled:opacity-60 sm:w-auto',
-            cx('h-14 gap-2.5 px-7 text-[18px]', 'h-[68px] gap-3 px-10 text-[22px]')
+            cx('h-14 gap-2.5 px-7 text-[18px]', 'h-12 gap-2 px-5 text-base')
           )}
         >
-          <Icon name={footer.cancel.icon} size={large ? 26 : 20} color="currentColor" />
+          <Icon name={footer.cancel.icon} size={large ? 20 : 20} color="currentColor" />
           {footer.cancel.label}
         </button>
         <button
@@ -325,10 +332,10 @@ export function ObservationForm({
           disabled={saving}
           className={cn(
             'inline-flex w-full items-center justify-center rounded-xl bg-[var(--color-forest)] font-bold text-[var(--sa-on-accent)] shadow-[0_4px_10px_rgba(34,82,74,0.25)] hover:brightness-95 focus-visible:ring-2 focus-visible:ring-[var(--sa-accent)] focus-visible:outline-none disabled:opacity-70 sm:w-auto',
-            cx('h-14 gap-2.5 px-7 text-[18px]', 'h-[68px] gap-3 px-10 text-[22px]')
+            cx('h-14 gap-2.5 px-7 text-[18px]', 'h-12 gap-2 px-5 text-base')
           )}
         >
-          <Icon name={footer.save.icon} size={large ? 26 : 20} color="currentColor" />
+          <Icon name={footer.save.icon} size={large ? 20 : 20} color="currentColor" />
           {saving ? footer.savingLabel : footer.save.label}
         </button>
       </footer>

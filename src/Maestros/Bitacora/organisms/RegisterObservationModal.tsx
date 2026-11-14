@@ -5,6 +5,7 @@ import type { BitacoraAlumno, Observacion } from '../types'
 
 interface RegisterObservationModalProps {
   alumno: BitacoraAlumno
+  demoMode?: boolean
   onClose: () => void
   onSave: (observacion: Observacion) => void
 }
@@ -14,6 +15,7 @@ const FOCUSABLE =
 
 export function RegisterObservationModal({
   alumno,
+  demoMode = false,
   onClose,
   onSave,
 }: RegisterObservationModalProps) {
@@ -83,6 +85,7 @@ export function RegisterObservationModal({
         <ObservationForm
           alumno={alumno}
           variant="modal"
+          demoMode={demoMode}
           titleId="obs-modal-title"
           onSave={onSave}
           onClose={onClose}

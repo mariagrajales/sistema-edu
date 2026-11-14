@@ -38,7 +38,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-family);
+  font-family: var(--font-heading);
   font-weight: 700;
   color: var(--color-text-primary);
   margin: 0;
@@ -59,7 +59,6 @@ input,
 select,
 textarea {
   font-family: inherit;
-  font-size: inherit;
   line-height: inherit;
 }
 
@@ -89,3 +88,66 @@ select:disabled,
 textarea:disabled {
   cursor: not-allowed;
 }
+
+.login-page {
+  color: var(--color-text-secondary);
+}
+
+.login-page h1 {
+  color: var(--color-login-heading);
+}
+
+.login-page form .relative:has(> input) {
+  border-color: var(--color-input-border);
+}
+
+.login-page form .relative:focus-within {
+  border-color: var(--color-input-focus);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  outline: none;
+}
+
+.login-page form .relative:has(> input[aria-invalid='true']) {
+  border-color: #B3261E;
+}
+
+.teacher-student-search:focus-visible {
+  outline: none;
+}
+
+.directory-search-control:focus-within {
+  border-color: var(--color-input-focus);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  outline: none;
+}
+
+.directory-search-input {
+  font-size: 11px;
+  outline: none;
+}
+
+.directory-search-input:focus-visible {
+  outline: none;
+}
+
+@media (hover: hover) {
+  .login-page .login-banner {
+    transition: transform 200ms ease-out;
+  }
+
+  .login-page .login-banner:hover {
+    transform: translateY(-2px);
+  }
+}
+
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .login-page {
+    zoom: clamp(0.5, calc(100vh / 800px), 1);
+  }
+}
+

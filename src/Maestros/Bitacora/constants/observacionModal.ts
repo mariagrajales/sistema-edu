@@ -9,11 +9,11 @@ export const observacionModal: ObservacionModalContent = {
   },
   context: {
     studentLabel: 'Estudiante asignado',
-    matricula: 'Matrícula: NX-2024-881',
+    matricula: 'Matrícula del alumno',
     specialistLabel: 'Especialista de seguimiento',
     specialistIcon: 'briefcase-medical',
-    specialistName: 'Dra. Claudia Méndez',
-    specialistArea: 'Gabinete de Psicopedagogía',
+    specialistName: 'Especialista de ejemplo',
+    specialistArea: 'Dato ficticio de demostración',
   },
   asignatura: {
     label: 'Asignatura y Titular Responsable',
@@ -23,7 +23,7 @@ export const observacionModal: ObservacionModalContent = {
   fecha: {
     label: 'Fecha y Momento de la Observación',
     icon: 'calendar',
-    value: 'Hoy, 04 de Febrero 2025 · 16:30 hrs',
+    value: 'Fecha actual · hora actual',
     help: 'Predeterminada automáticamente al horario en curso',
   },
   tipo: {
@@ -33,16 +33,16 @@ export const observacionModal: ObservacionModalContent = {
   descripcion: {
     label: 'Descripción Detallada del Hecho y Ajuste DUA',
     icon: 'file-text',
-    pautaLabel: 'Pauta Activa: Atenuación Sonora',
+    pautaLabel: 'Pauta de ejemplo: apoyo visual',
     help: 'Describa con claridad el hecho observado, los detonantes identificados y el recurso o ajuste razonable utilizado en clase.',
     calidad: 'Redacción clara y sin tecnicismos punitivos',
     calidadIcon: 'check',
     defaultText:
-      'Durante la lectura colectiva de Español II, Luis Andrés utilizó sus protectores auditivos atenuantes y concluyó el análisis del poema en tiempo reglamentario sin signos de fatiga.',
+      'Durante una actividad de aula, registra lo observado y el apoyo brindado. Este texto es solo de ejemplo.',
   },
   notificar: {
-    title: 'Notificar automáticamente al Gabinete de Psicología y adjuntar al expediente DUA',
-    body: 'Se enviará copia con prioridad estándar a la Dra. Claudia Méndez para revisión en la próxima junta técnica escolar.',
+    title: 'Notificar al equipo de apoyo',
+    body: 'La notificación está disponible como simulación en la vista de desarrollo.',
   },
   footer: {
     cancel: { label: 'Cancelar / Cerrar', icon: 'circle-x' },
@@ -53,33 +53,33 @@ export const observacionModal: ObservacionModalContent = {
   asignaturas: [
     {
       id: 'espanol',
-      label: 'Español II (Prof. Andrés Salazar)',
+      label: 'Español II (docente de ejemplo)',
       materia: 'Español II',
-      docente: 'Prof. Andrés Salazar (Docente Titular)',
+      docente: 'Docente de ejemplo',
       materiaIcon: 'book-open',
       filtro: 'espanol',
     },
     {
       id: 'quimica',
-      label: 'Química I (Profa. Ana Crystel Castañón)',
+      label: 'Química I (docente de ejemplo)',
       materia: 'Química I',
-      docente: 'Profa. Ana Crystel Castañón',
+      docente: 'Docente de ejemplo',
       materiaIcon: 'zap',
       filtro: 'quimica',
     },
     {
       id: 'tecnologia',
-      label: 'Tecnología (Prof. Raúl Paredes)',
+      label: 'Tecnología (docente de ejemplo)',
       materia: 'Tecnología',
-      docente: 'Prof. Raúl Paredes',
+      docente: 'Docente de ejemplo',
       materiaIcon: 'presentation',
       filtro: 'tecnologia',
     },
     {
       id: 'civica',
-      label: 'Formación Cívica (Profa. Diana Robles)',
+      label: 'Formación Cívica (docente de ejemplo)',
       materia: 'Formación Cívica',
-      docente: 'Profa. Diana Robles',
+      docente: 'Docente de ejemplo',
       materiaIcon: 'shield',
       filtro: 'civica',
     },

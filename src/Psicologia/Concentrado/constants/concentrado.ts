@@ -6,7 +6,7 @@ export const escuelaInfo = {
   zona: '014',
   sostenimiento: 'FEDERAL',
   turno: 'Vespertino',
-  periodo: 'Ciclo Escolar 2024-2025 (1er Semestre)',
+  periodo: 'Ciclo Escolar 2026-2027 (1er Semestre)',
   direccion:
     'Dirección de Educación Básica y Departamento de Educación Especial (SEE)',
 }
@@ -124,7 +124,7 @@ export function getResumenEstrategias(alumnos: AlumnoConcentrado[]): ResumenEstr
       chipTono: 'menta',
       descripcion:
         'Estrategias DUA: Agendas visuales anticipadas, pausas sensoriales programadas y reducción de estímulos acústicos en talleres.',
-      barraColor: '#22524A',
+      barraColor: 'var(--color-forest)',
       total: conteo.tea,
     },
     {
@@ -135,7 +135,7 @@ export function getResumenEstrategias(alumnos: AlumnoConcentrado[]): ResumenEstr
       chipTono: 'durazno',
       descripcion:
         'Estrategias DUA: Segmentación de instrucciones de examen en bloques de 15 min, monitoreo con tutor par y asientos preferenciales.',
-      barraColor: '#7A4320',
+      barraColor: 'var(--sa-coffee)',
       total: conteo.tdah,
     },
     {
@@ -146,7 +146,7 @@ export function getResumenEstrategias(alumnos: AlumnoConcentrado[]): ResumenEstr
       chipTono: 'azul',
       descripcion:
         'Estrategias DUA: Material escrito de apoyo, apoyo con subtitulaje en proyecciones y ubicación en primera fila frente al docente.',
-      barraColor: '#4A6075',
+      barraColor: 'var(--sa-slate)',
       total: conteo.auditiva,
     },
   ]

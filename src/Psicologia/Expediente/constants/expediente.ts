@@ -43,7 +43,7 @@ export const alumno: AlumnoExpediente = {
   diagnostico: 'TEA Grado 1 (Hipersensibilidad Acústica y Rigidez Cognitiva)',
   diagnosticoCorto: 'TEA Grado 1',
   curp: 'GOMM110508HCSMRNA',
-  ciclo: 'Ciclo Escolar: 2024 - 2025',
+  ciclo: 'Ciclo Escolar: 2026 - 2027',
   expediente: 'EXP-SEE-2024-084-BC',
   responsable: 'Resp.: Dra. Claudia Méndez Ortiz',
   estado: 'EN INTERVENCIÓN ACTIVA',
@@ -270,6 +270,6 @@ export const ultimaRevision = {
   accion: 'Ver Log',
 }
 
-export const cicloEscolar = 'Ciclo 2024-2025'
+export const cicloEscolar = 'Ciclo 2026-2027'
 
 export const folioDictamen = 'SEE-2024-E019'

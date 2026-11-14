@@ -9,7 +9,7 @@ export function CanalizacionesHeader() {
             <Icon name='clipboard' size={14} color='currentColor' />
             SUBDIRECCIÓN TÉCNICA · UNIDAD DE SERVICIOS EDUCATIVOS ESPECIALES (SEE)
           </span>
-          <h1 className='text-[clamp(24px,2.1vw,30px)] leading-tight font-extrabold text-[#1F4A3F]'>
+          <h1 className='text-[clamp(24px,2.1vw,30px)] leading-tight font-extrabold text-[var(--sa-title)]'>
             Registro y Control de Canalizaciones al Departamento de Psicología y SEE
           </h1>
           <p className='max-w-[90ch] text-[13.5px] text-[var(--sa-muted)]'>

@@ -102,7 +102,7 @@ export function getSession(): AuthSession | null {
   if (!raw) return null
   try {
     const session = JSON.parse(raw) as AuthSession
-    if (!session?.token || !session.user?.role) {
+    if (!session?.token || session.token.startsWith('dev-preview:') || !session.user?.role) {
       clearSession()
       return null
     }

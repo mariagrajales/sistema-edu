@@ -4,5 +4,5 @@ export const escuela = {
   zona: 'Zona 014',
   cct: '02EES0045Z',
   director: 'Mtro. Roberto Tovilla Ruiz',
-  ciclo: '2024-2025',
+  ciclo: '2026-2027',
 } as const

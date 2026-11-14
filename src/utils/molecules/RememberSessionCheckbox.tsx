@@ -16,13 +16,13 @@ export function RememberSessionCheckbox({
   return (
     <label
       className={cn(
-        'flex items-start gap-3 min-h-[var(--size-min-touch)] cursor-pointer',
+        'flex items-center justify-center gap-3 min-h-[var(--size-min-touch)] cursor-pointer text-center',
         className
       )}
     >
       <input
         type="checkbox"
-        className="mt-1 w-5 h-5 accent-[var(--color-forest)] shrink-0"
+        className="w-5 h-5 accent-[var(--color-forest)] shrink-0"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
       />

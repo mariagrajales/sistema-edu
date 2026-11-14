@@ -11,8 +11,8 @@ interface InfoNoticeProps {
 }
 
 const toneClasses = {
-  policy: 'bg-[var(--color-surface-alt)] border-[var(--color-surface)]',
-  privacy: 'bg-[var(--color-surface-alt)] border-[var(--color-surface)]',
+  policy: 'bg-[var(--color-surface-alt)] border-[var(--color-separator)]',
+  privacy: 'bg-[var(--color-surface-alt)] border-[var(--color-separator)]',
 } as const
 
 export function InfoNotice({ icon, title, body, tone = 'policy', className }: InfoNoticeProps) {
@@ -26,7 +26,7 @@ export function InfoNotice({ icon, title, body, tone = 'policy', className }: In
     >
       <div className="flex items-center gap-2">
         <Icon name={icon} size={18} color="var(--color-text-primary)" />
-        <h4 className="text-sm font-bold">{title}</h4>
+        <h4 className="text-sm font-bold text-[var(--color-text-primary)]">{title}</h4>
       </div>
       <p className="text-sm">{body}</p>
     </div>
