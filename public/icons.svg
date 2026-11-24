@@ -51,7 +51,7 @@
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
   </symbol>
   <symbol id="brain" viewBox="0 0 24 24">
-    <path d="M9.5 2a5.5 5.5 0 0 0-2 10.67V15a2 2 0 0 0 2 2h1v3a2 2 0 0 0 4 0v-3h1a2 2 0 0 0 2-2v-2.33A5.5 5.5 0 1 0 9.5 2ZM8 7a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm8 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-4 4a2 2 0 0 1-2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M12 4.5a3.5 3.5 0 0 0-6.3-.9A4 4 0 0 0 3 7.5a4 4 0 0 0 .9 6.3A3.5 3.5 0 0 0 7 19h5M12 4.5a3.5 3.5 0 0 1 6.3-.9A4 4 0 0 1 21 7.5a4 4 0 0 1-.9 6.3A3.5 3.5 0 0 1 17 19h-5M12 4.5V19M7.5 7a2.5 2.5 0 0 1 2.5 2.5M7 12a2.5 2.5 0 0 0 2.5 2.5m7-7.5a2.5 2.5 0 0 0-2.5 2.5m3 2.5a2.5 2.5 0 0 1-2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
   </symbol>
   <symbol id="info" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

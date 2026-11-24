@@ -9,7 +9,7 @@ export function ResumenDiagnosticoCard({ resumen }: ResumenDiagnosticoCardProps)
     <section className='rounded-[12px] border border-[var(--sa-border)] bg-[var(--sa-card)] shadow-[var(--shadow-sm)]'>
       <header className='flex flex-wrap items-center justify-between gap-2 border-b border-[var(--sa-border)] px-6 py-4'>
         <div className='flex items-center gap-2.5'>
-          <span className='flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--sa-sky)] text-[var(--sa-steel)]'>
+          <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--sa-sky)] text-[var(--sa-steel)]'>
             <Icon name='file-text' size={18} color='currentColor' />
           </span>
           <div className='flex flex-col'>
@@ -54,7 +54,7 @@ export function ResumenDiagnosticoCard({ resumen }: ResumenDiagnosticoCardProps)
           <p className='text-[15px] leading-[1.7] text-[var(--color-text-primary)]'>{resumen.resumen}</p>
         </div>
         <div className='flex items-start gap-3 rounded-xl bg-[var(--sa-field)] px-4 py-3'>
-          <span className='flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--sa-card)] text-[var(--color-forest)]'>
+          <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--sa-card)] text-[var(--color-forest)]'>
             <Icon name='info' size={18} color='currentColor' />
           </span>
           <div className='flex flex-col gap-1'>

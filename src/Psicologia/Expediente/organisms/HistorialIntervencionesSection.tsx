@@ -9,7 +9,7 @@ export function HistorialIntervencionesSection({ historial }: HistorialIntervenc
   return (
     <section className='flex flex-col gap-4 rounded-[12px] border border-[var(--sa-border)] bg-[var(--sa-card)] p-6 shadow-[var(--shadow-sm)]'>
       <header className='flex items-start gap-3'>
-        <span className='flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--sa-sky)] text-[var(--sa-steel)]'>
+        <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--sa-sky)] text-[var(--sa-steel)]'>
           <Icon name='clock' size={20} color='currentColor' />
         </span>
         <div className='flex flex-col gap-1'>

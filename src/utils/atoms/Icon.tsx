@@ -14,7 +14,7 @@ export function Icon({ name, size = 20, className, color = 'currentColor', 'aria
     <svg
       width={size}
       height={size}
-      className={cn(className)}
+      className={cn('shrink-0', className)}
       style={{ color }}
       aria-hidden={ariaLabel ? undefined : 'true'}
       role={ariaLabel ? 'img' : undefined}

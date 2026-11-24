@@ -10,7 +10,7 @@ export function FortalezasYPerfil({ fortalezas, perfil }: FortalezasYPerfilProps
   return (
     <section className='flex flex-col gap-4 rounded-[12px] border border-[var(--sa-border)] bg-[var(--sa-card)] p-6 shadow-[var(--shadow-sm)]'>
       <header className='flex items-start gap-3'>
-        <span className='flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--sa-menta)] text-[var(--sa-on-menta)]'>
+        <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--sa-menta)] text-[var(--sa-on-menta)]'>
           <Icon name='brain' size={20} color='currentColor' />
         </span>
         <div className='flex flex-col gap-1'>
@@ -28,7 +28,7 @@ export function FortalezasYPerfil({ fortalezas, perfil }: FortalezasYPerfilProps
           <article key={fortaleza.id} className='flex min-w-0 flex-col gap-2 rounded-xl border border-[var(--sa-border)] p-5'>
             <div className='flex items-start justify-between gap-2'>
               <div className='flex items-start gap-2.5'>
-                <span className='flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--sa-menta)] text-[var(--sa-on-menta)]'>
+                <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--sa-menta)] text-[var(--sa-on-menta)]'>
                   <Icon name='star' size={18} color='currentColor' />
                 </span>
                 <h3 className='text-[16px] leading-snug font-extrabold' style={{ color: 'var(--sa-title)' }}>
@@ -49,7 +49,7 @@ export function FortalezasYPerfil({ fortalezas, perfil }: FortalezasYPerfilProps
       <div className='flex flex-col gap-4 rounded-xl border border-[var(--sa-border)] p-5'>
         <header className='flex items-center justify-between gap-2'>
           <div className='flex items-center gap-2.5'>
-            <span className='flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--sa-sky)] text-[var(--sa-steel)]'>
+            <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--sa-sky)] text-[var(--sa-steel)]'>
               <Icon name='trending-up' size={18} color='currentColor' />
             </span>
             <h3 className='text-[16px] font-extrabold' style={{ color: 'var(--sa-title)' }}>
